@@ -19,6 +19,9 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddSingleton<IOrganizationsRepository, InMemOrganizationsRepository>();
 
+// DB connection: defined in appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("CharityOrganizationsContext");
+
 var app = builder.Build();
 
 /*---------------------------------*/
