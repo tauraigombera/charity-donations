@@ -54,7 +54,7 @@ The application is built with the following technologies:
 
    The application runs on [`http://localhost:5073/`](http://localhost:5073/).
 
-###Starting sql server with docker
+### Starting sql server with docker
 
 If you don't have docker installed and running on your machine, go ahead and [install docker](https://docs.docker.com/desktop/).
 
@@ -81,7 +81,8 @@ Run `docker ps` to see the container.
 
 If you want to stop the container, you can run `docker stop mssql`. You can also restart the container by running the docker run command above.
 
-###saving connection string to secret manager
+### saving connection string to secret manager
+
 Instead of defining connection string in appsettings.json, we are using SecretManager provided by .NET to store our connection strings
 
 ```bash
