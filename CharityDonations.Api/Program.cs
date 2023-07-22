@@ -1,3 +1,4 @@
+using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
 using CharityDonations.Api.Repositories;
 using Microsoft.OpenApi.Models;
@@ -21,6 +22,9 @@ builder.Services.AddSingleton<IOrganizationsRepository, InMemOrganizationsReposi
 
 // DB connection: defined in appsettings.json
 var connectionString = builder.Configuration.GetConnectionString("CharityOrganizationsContext");
+
+// Db context registration
+builder.Services.AddSqlServer<CharityOrganizationsContext>(connectionString);
 
 var app = builder.Build();
 
