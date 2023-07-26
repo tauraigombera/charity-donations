@@ -1,12 +1,12 @@
-﻿using CharityDonations.Api.Entities;
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore;
+using CharityDonations.Api.Entities;
 namespace CharityDonations.Api.Data;
 
 public class CharityOrganizationsContext : DbContext
 {
-    public CharityOrganizationsContext(DbContextOptions<CharityOrganizationsContext> options) : base(options)
-    {   
-    }
-    public DbSet<Organization> Organizations { get; set; }
+     public CharityOrganizationsContext(DbContextOptions<CharityOrganizationsContext> options) 
+         : base(options)
+     {   
+     }
+     public DbSet<Organization> Organizations { get; set; }
 }

@@ -1,6 +1,7 @@
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
 using CharityDonations.Api.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,16 +21,17 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddSingleton<IOrganizationsRepository, InMemOrganizationsRepository>();
 
-// DB connection: defined in appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("CharityOrganizationsContext");
-
-// Db context registration
+// Read DB connection string from .NET secret manager
+var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
 builder.Services.AddSqlServer<CharityOrganizationsContext>(connectionString);
-
+ 
 var app = builder.Build();
 
+//apply migrations to database
+app.Services.InitializeDb();
+
 /*---------------------------------*/
-// middleware registrations
+// middleware registrations 
 app.UseSwagger();
 
 app.UseSwaggerUI(c =>
