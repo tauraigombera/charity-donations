@@ -13,19 +13,19 @@ public static class OrganizationsEndpoints
                 .WithParameterValidation();
 
         //Get organizations
-        group.MapGet("/", (IOrganizationsRepository repository) => 
-            repository.GetAllAsync().Select(organization => organization.AsDto()));
+        group.MapGet("/", async (IOrganizationsRepository repository) => 
+            (await repository.GetAllAsync()).Select(organization => organization.AsDto()));
 
         //Get organization by id
-        group.MapGet("/{id}", (IOrganizationsRepository repository, int id) => 
+        group.MapGet("/{id}", async (IOrganizationsRepository repository, int id) => 
         {
-            Organization? organization = repository.GetAsync(id);
+            Organization? organization = await repository.GetAsync(id);
             return organization is not null ? Results.Ok(organization.AsDto()) : Results.NotFound();
         })
         .WithName(GetOrganizationEndpointName);
 
         //Post an organization
-        group.MapPost("/", (IOrganizationsRepository repository, CreateOrganizationDto organizationDto) =>
+        group.MapPost("/", async (IOrganizationsRepository repository, CreateOrganizationDto organizationDto) =>
         {
             Organization organization = new()
             {
@@ -35,14 +35,14 @@ public static class OrganizationsEndpoints
                 ImageUrl = organizationDto.ImageUrl
             };
 
-            repository.CreateAsync(organization);
+            await repository.CreateAsync(organization);
             return Results.CreatedAtRoute(GetOrganizationEndpointName, new {id = organization.Id}, organization);
         });
 
         //Update an organization
-        group.MapPut("/{id}", (IOrganizationsRepository repository, int id, UpdateOrganizationDto updatedOrganizationDto) =>
+        group.MapPut("/{id}", async (IOrganizationsRepository repository, int id, UpdateOrganizationDto updatedOrganizationDto) =>
         {
-            Organization? existingOrganization = repository.GetAsync(id);
+            Organization? existingOrganization = await repository.GetAsync(id);
 
             if (existingOrganization is null){
                 return Results.NotFound();
@@ -53,19 +53,19 @@ public static class OrganizationsEndpoints
             existingOrganization.Description = updatedOrganizationDto.Description;
             existingOrganization.ImageUrl = updatedOrganizationDto.ImageUrl;
 
-            repository.UpdateAsync(existingOrganization);
+            await repository.UpdateAsync(existingOrganization);
 
             return Results.NoContent();
         });
 
         //Delete an organization
-        group.MapDelete("/{id}", (IOrganizationsRepository repository, int id) =>
+        group.MapDelete("/{id}", async (IOrganizationsRepository repository, int id) =>
         {
-            Organization? organization = repository.GetAsync(id);
+            Organization? organization = await repository.GetAsync(id);
 
             if (organization is not null)
             {
-                repository.DeleteAsync(id);
+                await repository.DeleteAsync(id);
             } 
 
             return Results.NoContent();
