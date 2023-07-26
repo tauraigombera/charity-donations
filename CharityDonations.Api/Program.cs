@@ -1,7 +1,6 @@
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
 using CharityDonations.Api.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +18,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddSingleton<IOrganizationsRepository, InMemOrganizationsRepository>();
+builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 
 // Read DB connection string from .NET secret manager
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
