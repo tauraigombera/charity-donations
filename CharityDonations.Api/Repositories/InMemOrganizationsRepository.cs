@@ -31,31 +31,37 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
         }
     };
 
-    public IEnumerable<Organization> GetAll()
+    public async Task<IEnumerable<Organization>> GetAllAsync()
     {
-        return organizations;
+        return await Task.FromResult(organizations);
     }
 
-    public Organization? Get(int id)
+    public async Task<Organization?> GetAsync(int id)
     {
-        return organizations.Find(organization => organization.Id == id);
+        return await Task.FromResult(organizations.Find(organization => organization.Id == id));
     }
 
-    public void Create(Organization organization)
+    public async Task CreateAsync(Organization organization)
     {
         organization.Id = organizations.Max(organization => organization.Id) + 1;
         organizations.Add(organization);
+
+        await Task.CompletedTask;
     }
 
-    public void Update(Organization updatedOrganization)
+    public async Task UpdateAsync(Organization updatedOrganization)
     {
         var index = organizations.FindIndex(organization => organization.Id == updatedOrganization.Id);
         organizations[index] = updatedOrganization;
+
+        await Task.CompletedTask;
     }
 
-    public void Delete(int id)
+    public async Task DeleteAsync(int id)
     {
         var index = organizations.FindIndex(organization => organization.Id == id);
         organizations.RemoveAt(index);
+
+        await Task.CompletedTask;
     }
 }

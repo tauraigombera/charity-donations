@@ -14,12 +14,12 @@ public static class OrganizationsEndpoints
 
         //Get organizations
         group.MapGet("/", (IOrganizationsRepository repository) => 
-            repository.GetAll().Select(organization => organization.AsDto()));
+            repository.GetAllAsync().Select(organization => organization.AsDto()));
 
         //Get organization by id
         group.MapGet("/{id}", (IOrganizationsRepository repository, int id) => 
         {
-            Organization? organization = repository.Get(id);
+            Organization? organization = repository.GetAsync(id);
             return organization is not null ? Results.Ok(organization.AsDto()) : Results.NotFound();
         })
         .WithName(GetOrganizationEndpointName);
@@ -35,14 +35,14 @@ public static class OrganizationsEndpoints
                 ImageUrl = organizationDto.ImageUrl
             };
 
-            repository.Create(organization);
+            repository.CreateAsync(organization);
             return Results.CreatedAtRoute(GetOrganizationEndpointName, new {id = organization.Id}, organization);
         });
 
         //Update an organization
         group.MapPut("/{id}", (IOrganizationsRepository repository, int id, UpdateOrganizationDto updatedOrganizationDto) =>
         {
-            Organization? existingOrganization = repository.Get(id);
+            Organization? existingOrganization = repository.GetAsync(id);
 
             if (existingOrganization is null){
                 return Results.NotFound();
@@ -53,7 +53,7 @@ public static class OrganizationsEndpoints
             existingOrganization.Description = updatedOrganizationDto.Description;
             existingOrganization.ImageUrl = updatedOrganizationDto.ImageUrl;
 
-            repository.Update(existingOrganization);
+            repository.UpdateAsync(existingOrganization);
 
             return Results.NoContent();
         });
@@ -61,11 +61,11 @@ public static class OrganizationsEndpoints
         //Delete an organization
         group.MapDelete("/{id}", (IOrganizationsRepository repository, int id) =>
         {
-            Organization? organization = repository.Get(id);
+            Organization? organization = repository.GetAsync(id);
 
             if (organization is not null)
             {
-                repository.Delete(id);
+                repository.DeleteAsync(id);
             } 
 
             return Results.NoContent();

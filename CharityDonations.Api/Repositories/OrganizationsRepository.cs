@@ -13,31 +13,31 @@ public class OrganizationsRepository : IOrganizationsRepository
         this.dbContext = dbContext;
     }
 
-    public IEnumerable<Organization> GetAll()
+    public async Task<IEnumerable<Organization>> GetAllAsync()
     {
-        return dbContext.Organizations.AsNoTracking().ToList();
+        return await dbContext.Organizations.AsNoTracking().ToListAsync();
     }
 
-    public Organization? Get(int id)
+    public async Task<Organization?> GetAsync(int id)
     {
-        return dbContext.Organizations.Find(id);
+        return await dbContext.Organizations.FindAsync(id);
     }
 
-    public void Create(Organization organization)
+    public async Task CreateAsync(Organization organization)
     {
         dbContext.Organizations.Add(organization);
-        dbContext.SaveChanges();
+        await dbContext.SaveChangesAsync();
     }
 
-    public void Update(Organization updatedOrganization)
+    public async Task UpdateAsync(Organization updatedOrganization)
     {
         dbContext.Update(updatedOrganization);
-        dbContext.SaveChanges();
+        await dbContext.SaveChangesAsync();
     }
 
-     public void Delete(int id)
+     public async Task DeleteAsync(int id)
     {
-        dbContext.Organizations.Where(organization => organization.Id == id)
-                               .ExecuteDelete();
+        await dbContext.Organizations.Where(organization => organization.Id == id)
+                               .ExecuteDeleteAsync();
     }
 }

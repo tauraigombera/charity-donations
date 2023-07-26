@@ -4,9 +4,9 @@ namespace CharityDonations.Api.Repositories;
 
 public interface IOrganizationsRepository
 {
-    void Create(Organization organization);
-    void Delete(int id);
-    Organization? Get(int id);
-    IEnumerable<Organization> GetAll();
-    void Update(Organization updatedOrganization);
+    Task CreateAsync(Organization organization);
+    Task DeleteAsync(int id);
+    Task<Organization?> GetAsync(int id);
+    Task<IEnumerable<Organization>> GetAllAsync();
+    Task UpdateAsync(Organization updatedOrganization);
 }
