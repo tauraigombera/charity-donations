@@ -27,7 +27,7 @@ builder.Services.AddSqlServer<CharityOrganizationsContext>(connectionString);
 var app = builder.Build();
 
 //apply migrations to database
-app.Services.InitializeDb();
+await app.Services.InitializeDbAsync();
 
 /*---------------------------------*/
 // middleware registrations 
