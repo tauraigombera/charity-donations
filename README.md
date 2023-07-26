@@ -56,21 +56,13 @@ The application is built with the following technologies:
 
 ### Starting sql server with docker
 
+# install docker
+
 If you don't have docker installed and running on your machine, go ahead and [install docker](https://docs.docker.com/desktop/).
 
-Verify if docker is running by checking the version of your docker
+# pull mssql server docker image
 
-```bash
-docker --version
-```
-
-To see docker containers that are currently running run the following command:
-
-```bash
-docker ps
-```
-
-Go ahead and run the following commands to pull Microsoft SQL Server image from docker hub and start it as a container on your machine:
+Pull Microsoft SQL Server image from docker hub and start it as a container on your machine:
 
 ```bash
 $sa_password = "[YOUR SA PASSWORD HERE]"
@@ -79,15 +71,17 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=$sa_password" -p 1433:1433 -
 
 Run `docker ps` to see the container.
 
-If you want to stop the container, you can run `docker stop mssql`. You can also restart the container by running the docker run command above.
+Run `docker stop mssql` whenever you want to stop the container.
 
-### saving connection string to secret manager
+Run the "docker run..." command above whenever you want to restart the container.
 
-Instead of defining connection string in appsettings.json, we are using SecretManager provided by .NET to store our connection strings
+# safe storage of connection string to .NET secret manager
+
+Instead of defining connection string in appsettings.json, we are using SecretManager provided by .NET to safely store our connection strings
 
 ```bash
 $sa_password = "[YOUR SA PASSWORD HERE]"
-dotnet user-secrets set "ConnectionStrings: CharityOrganizationsContext" "Server=localhost; Database=CharityOrganizations; User Id=sa; Password=$sa_password;TrustServiceCertificate=true"
+dotnet user-secrets set "ConnectionStrings: CharityOrganizationsContext" "Server=localhost; Database=CharityOrganizations; User Id=sa; Password=$sa_password;TrustServerCertificate=True"
 ```
 
 Notice that the sa password is the one that you set before when configuring mssql server. If this command is successfuly excuted, you will see a message, "successfully saved ConnectionStrings... to the secret store".
