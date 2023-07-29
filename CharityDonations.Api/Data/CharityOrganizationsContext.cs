@@ -9,4 +9,5 @@ public class CharityOrganizationsContext : DbContext
      {   
      }
      public DbSet<Organization> Organizations { get; set; }
+     public DbSet<Contact> Contacts { get; set; }
 }
