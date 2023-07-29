@@ -16,5 +16,5 @@ public class Organization
     [Url]
     [StringLength(100)]
     public required string ImageUrl { get; set; }
-    public required List<Contact> Contacts { get; set; }
+    public required Contact Contact { get; set; }
 }
