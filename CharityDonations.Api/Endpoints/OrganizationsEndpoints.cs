@@ -32,7 +32,15 @@ public static class OrganizationsEndpoints
                 Name = organizationDto.Name,
                 Mission = organizationDto.Mission,
                 Description = organizationDto.Description,
-                ImageUrl = organizationDto.ImageUrl
+                ImageUrl = organizationDto.ImageUrl,
+                Contact = new Contact
+                {
+                    Email = organizationDto.Contact.Email,
+                    PhoneNumber = organizationDto.Contact.PhoneNumber,
+                    Address1 = organizationDto.Contact.Address1,
+                    Address2 = organizationDto.Contact.Address2,
+                    Address3 = organizationDto.Contact.Address3
+                }
             };
 
             await repository.CreateAsync(organization);
