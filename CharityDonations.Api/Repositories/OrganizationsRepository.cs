@@ -15,12 +15,12 @@ public class OrganizationsRepository : IOrganizationsRepository
 
     public async Task<IEnumerable<Organization>> GetAllAsync()
     {
-        return await dbContext.Organizations.AsNoTracking().ToListAsync();
+        return await dbContext.Organizations.Include(x => x.Contact).AsNoTracking().ToListAsync();
     }
 
     public async Task<Organization?> GetAsync(int id)
     {
-        return await dbContext.Organizations.FindAsync(id);
+        return await dbContext.Organizations.Include(x => x.Contact).SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task CreateAsync(Organization organization)
