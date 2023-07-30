@@ -1,6 +1,8 @@
+using System.Text.Json.Serialization;
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
 using CharityDonations.Api.Repositories;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,12 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
+
+// Custom JSON serialization options
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 // Read DB connection string from .NET secret manager
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
