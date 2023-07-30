@@ -23,3 +23,31 @@ public record UpdateOrganizationDto(
     [Required] [StringLength(250)] string Description,
     [Url] [StringLength(100)] string ImageUrl
 );
+
+public record ContactDto(
+    int Id,
+    string Email,
+    string PhoneNumber,
+    string Address1,
+    string Address2,
+    string Address3,
+    int OrganizationId
+);
+
+public record CreateContactDto(
+    [Required] [StringLength(50)] string Email,
+    [Required] [StringLength(20)] string PhoneNumber,
+    [Required] [StringLength(150)] string Address1,
+    [Required] [StringLength(150)] string Address2,
+    [Required] [StringLength(150)] string Address3,
+    [Required] int OrganizationId
+);
+
+public record UpdateContactDto(
+   [Required] [StringLength(50)] string Email,
+    [Required] [StringLength(20)] string PhoneNumber,
+    [Required] [StringLength(150)] string Address1,
+    [Required] [StringLength(150)] string Address2,
+    [Required] [StringLength(150)] string Address3,
+    [Required] int OrganizationId
+);
