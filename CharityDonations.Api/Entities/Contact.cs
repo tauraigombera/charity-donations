@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace CharityDonations.Api.Entities;
 
@@ -15,12 +14,10 @@ public class Contact
     [Required]
     [StringLength(150)]
     public required string Address1 { get; set; }
-    [Required]
     [StringLength(150)]
-    public required string Address2 { get; set; }
-    [Required]
+    public string? Address2 { get; set; }
     [StringLength(150)]
     public string? Address3 { get; set; }
     public int OrganizationId { get; set; }
-    public required Organization Organization { get; set; }
+    public Organization? Organization { get; set; }
 }
