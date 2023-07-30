@@ -13,8 +13,13 @@ public static class OrganizationsEndpoints
                 .WithParameterValidation();
 
         //Get organizations
-        group.MapGet("/", async (IOrganizationsRepository repository) => 
-            (await repository.GetAllAsync()).Select(organization => organization.AsDto()));
+        group.MapGet("/", async (IOrganizationsRepository repository) =>
+        {
+            var organizations = await repository.GetAllAsync();
+            var organizationDtos = organizations.Select(organization => organization.AsDto());
+            return Results.Ok(organizationDtos);
+        });
+
 
         //Get organization by id
         group.MapGet("/{id}", async (IOrganizationsRepository repository, int id) => 
