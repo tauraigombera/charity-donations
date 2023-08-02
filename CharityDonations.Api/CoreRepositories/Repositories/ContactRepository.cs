@@ -2,7 +2,7 @@
 using CharityDonations.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CharityDonations.Api.Repositories;
+namespace CharityDonations.Api.CoreRepositories.Repositories;
 
 public class ContactRepository : IContactRepository
 {

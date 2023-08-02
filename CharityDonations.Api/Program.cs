@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
+using CharityDonations.Api.CoreRepositories;
+using CharityDonations.Api.CoreRepositories.Repositories;
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
-using CharityDonations.Api.Repositories;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 

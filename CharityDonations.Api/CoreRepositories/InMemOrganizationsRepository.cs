@@ -1,6 +1,6 @@
 ﻿using CharityDonations.Api.Models;
 
-namespace CharityDonations.Api.Repositories;
+namespace CharityDonations.Api.CoreRepositories;
 
 public class InMemOrganizationsRepository : IOrganizationsRepository
 {
