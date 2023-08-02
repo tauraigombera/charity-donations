@@ -18,8 +18,8 @@ public static class EntityExtensions
 
     public static ContactDto AsDto(this Contact contact)
     {
-        if (contact == null)
-            return null;
+        // if (contact == null)
+        //     return null;
 
         return new ContactDto
         (
