@@ -2,7 +2,7 @@
 
 namespace CharityDonations.Api.Models;
 
-public static class EntityExtensions
+public static class ModelExtensions
 {
     public static OrganizationDto AsDto(this Organization organization)
     {
@@ -18,9 +18,6 @@ public static class EntityExtensions
 
     public static ContactDto AsDto(this Contact contact)
     {
-        // if (contact == null)
-        //     return null;
-
         return new ContactDto
         (
             contact.Id,
