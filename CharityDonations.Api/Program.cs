@@ -30,7 +30,7 @@ builder.Services.Configure<JsonOptions>(options =>
 
 // Read DB connection string from .NET secret manager
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
-builder.Services.AddSqlServer<CharityOrganizationsContext>(connectionString);
+builder.Services.AddSqlServer<ApiDbContext>(connectionString);
  
 var app = builder.Build();
 

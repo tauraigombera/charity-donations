@@ -6,9 +6,9 @@ namespace CharityDonations.Api.Repositories;
 
 public class OrganizationsRepository : IOrganizationsRepository
 {
-    private readonly CharityOrganizationsContext dbContext;
+    private readonly ApiDbContext dbContext;
 
-    public OrganizationsRepository(CharityOrganizationsContext dbContext)
+    public OrganizationsRepository(ApiDbContext dbContext)
     {
         this.dbContext = dbContext;
     }

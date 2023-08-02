@@ -2,9 +2,9 @@
 using CharityDonations.Api.Entities;
 namespace CharityDonations.Api.Data;
 
-public class CharityOrganizationsContext : DbContext
+public class ApiDbContext : DbContext
 {
-     public CharityOrganizationsContext(DbContextOptions<CharityOrganizationsContext> options) 
+     public ApiDbContext(DbContextOptions<ApiDbContext> options) 
          : base(options)
      {   
      }

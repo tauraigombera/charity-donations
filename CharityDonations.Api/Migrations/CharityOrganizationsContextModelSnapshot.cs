@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CharityDonations.Api.Migrations
 {
-    [DbContext(typeof(CharityOrganizationsContext))]
+    [DbContext(typeof(ApiDbContext))]
     partial class CharityOrganizationsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

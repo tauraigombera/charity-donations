@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CharityDonations.Api.Migrations
 {
-    [DbContext(typeof(CharityOrganizationsContext))]
+    [DbContext(typeof(ApiDbContext))]
     [Migration("20230726113310_InitialCreate")]
     partial class InitialCreate
     {
