@@ -1,5 +1,5 @@
 ﻿using CharityDonations.Api.Data;
-using CharityDonations.Api.Entities;
+using CharityDonations.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CharityDonations.Api.Repositories;

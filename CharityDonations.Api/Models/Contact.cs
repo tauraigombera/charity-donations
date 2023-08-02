@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CharityDonations.Api.Entities;
+namespace CharityDonations.Api.Models;
 
 public class Contact
 {

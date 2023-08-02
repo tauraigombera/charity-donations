@@ -1,5 +1,5 @@
 ﻿using CharityDonations.Api.Dtos;
-using CharityDonations.Api.Entities;
+using CharityDonations.Api.Models;
 using CharityDonations.Api.Repositories;
 
 namespace CharityDonations.Api.Endpoints;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CharityDonations.Api.Entities;
+using CharityDonations.Api.Models;
 namespace CharityDonations.Api.Data;
 
 public class ApiDbContext : DbContext

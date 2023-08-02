@@ -1,6 +1,6 @@
 ﻿using CharityDonations.Api.Dtos;
 
-namespace CharityDonations.Api.Entities;
+namespace CharityDonations.Api.Models;
 
 public static class EntityExtensions
 {

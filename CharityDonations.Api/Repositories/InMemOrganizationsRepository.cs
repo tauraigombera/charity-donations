@@ -1,4 +1,4 @@
-﻿using CharityDonations.Api.Entities;
+﻿using CharityDonations.Api.Models;
 
 namespace CharityDonations.Api.Repositories;
 
