@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="CoreRepositories\Repositories\" />
+    <Folder Include="Dtos\OrganizationDtos\" />
   </ItemGroup>
 
 </Project>

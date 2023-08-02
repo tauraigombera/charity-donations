@@ -1,8 +1,10 @@
 ﻿using CharityDonations.Api.Dtos;
+using CharityDonations.Api.Dtos.ContactDtos;
+using CharityDonations.Api.Dtos.OrganizationDtos;
 
 namespace CharityDonations.Api.Models;
 
-public static class ModelExtensions
+public static class EntityExtensions
 {
     public static OrganizationDto AsDto(this Organization organization)
     {

@@ -1,6 +1,6 @@
-﻿using CharityDonations.Api.Dtos;
-using CharityDonations.Api.Models;
+﻿using CharityDonations.Api.Models;
 using CharityDonations.Api.CoreRepositories;
+using CharityDonations.Api.Dtos.OrganizationDtos;
 
 namespace CharityDonations.Api.Endpoints;
 public static class OrganizationsEndpoints

@@ -19,5 +19,4 @@ public class Contact
     [StringLength(150)]
     public string? Address3 { get; set; }
     public int OrganizationId { get; set; }
-    public Organization? Organization { get; set; }
 }
