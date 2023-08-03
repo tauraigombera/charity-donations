@@ -1,4 +1,5 @@
-﻿using CharityDonations.Api.Dtos.ContactDtos;
+﻿using CharityDonations.Api.BankAccountDtos;
+using CharityDonations.Api.Dtos.ContactDtos;
 
 namespace CharityDonations.Api.Dtos.OrganizationDtos;
 public record OrganizationDto(
@@ -7,5 +8,6 @@ public record OrganizationDto(
     string Mission,
     string Description,
     string ImageUrl,
-    ContactDto Contact
+    ContactDto Contact,
+    BankAccountDto BankAccount
 );

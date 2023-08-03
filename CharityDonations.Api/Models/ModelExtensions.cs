@@ -14,7 +14,8 @@ public static class EntityExtensions
             organization.Mission,
             organization.Description,
             organization.ImageUrl,
-            organization.Contact.AsDto()
+            organization.Contact.AsDto(),
+            organization.BankAccount.AsDto()
         );
     }
 
