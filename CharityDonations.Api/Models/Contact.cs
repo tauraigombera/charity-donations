@@ -6,6 +6,7 @@ public class Contact
 {
     public int Id { get; set;}
     [Required]
+    [EmailAddress]
     [StringLength(50)]
     public required string Email { get; set;}
     [Required]
