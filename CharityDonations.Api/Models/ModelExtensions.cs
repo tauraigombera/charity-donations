@@ -1,4 +1,5 @@
-﻿using CharityDonations.Api.Dtos.ContactDtos;
+﻿using CharityDonations.Api.BankAccountDtos;
+using CharityDonations.Api.Dtos.ContactDtos;
 using CharityDonations.Api.Dtos.OrganizationDtos;
 
 namespace CharityDonations.Api.Models;
@@ -27,6 +28,18 @@ public static class EntityExtensions
             contact.Address1,
             contact.Address2,
             contact.Address3
+        );
+    }
+
+    public static BankAccountDto AsDto(this BankAccount bankAccount)
+    {
+        return new BankAccountDto
+        (
+            bankAccount.Id,
+            bankAccount.AccountNumber,
+            bankAccount.AccountHolderName,
+            bankAccount.BankName,
+            bankAccount.BranchName
         );
     }
 }
