@@ -1,5 +1,4 @@
-﻿using CharityDonations.Api.Dtos;
-using CharityDonations.Api.Dtos.ContactDtos;
+﻿using CharityDonations.Api.Dtos.ContactDtos;
 using CharityDonations.Api.Dtos.OrganizationDtos;
 
 namespace CharityDonations.Api.Models;
