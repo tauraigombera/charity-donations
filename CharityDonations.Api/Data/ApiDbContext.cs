@@ -10,4 +10,5 @@ public class ApiDbContext : DbContext
      }
      public DbSet<Organization> Organizations { get; set; }
      public DbSet<Contact> Contacts { get; set; }
+     public DbSet<BankAccount> BankAccounts { get; set; }
 }
