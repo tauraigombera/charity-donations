@@ -10,6 +10,7 @@ public class Contact
     [StringLength(50)]
     public required string Email { get; set;}
     [Required]
+    [Phone]
     [StringLength(20)]
     public required string PhoneNumber { get; set; }
     [Required]
