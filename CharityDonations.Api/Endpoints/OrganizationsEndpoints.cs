@@ -65,6 +65,13 @@ public static class OrganizationsEndpoints
             existingOrganization.Mission = updatedOrganizationDto.Mission;
             existingOrganization.Description = updatedOrganizationDto.Description;
             existingOrganization.ImageUrl = updatedOrganizationDto.ImageUrl;
+            
+            //Update contact details
+            existingOrganization.Contact.Email = updatedOrganizationDto.Contact.Email;
+            existingOrganization.Contact.PhoneNumber = updatedOrganizationDto.Contact.PhoneNumber;
+            existingOrganization.Contact.Address1 = updatedOrganizationDto.Contact.Address1;
+            existingOrganization.Contact.Address2 = updatedOrganizationDto.Contact.Address2;
+            existingOrganization.Contact.Address3 = updatedOrganizationDto.Contact.Address3;
 
             await repository.UpdateAsync(existingOrganization);
 
