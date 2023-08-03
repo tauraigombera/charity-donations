@@ -8,5 +8,5 @@ public record CreateOrganizationDto(
     [Required] [StringLength(150)] string Mission,
     [Required] [StringLength(250)] string Description,
     [Url] [StringLength(100)] string ImageUrl,
-    ContactDto Contact
+    [Required] CreateContactDto Contact
 );
