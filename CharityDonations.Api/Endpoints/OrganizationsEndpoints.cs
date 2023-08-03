@@ -45,6 +45,13 @@ public static class OrganizationsEndpoints
                     Address1 = organizationDto.Contact.Address1,
                     Address2 = organizationDto.Contact.Address2,
                     Address3 = organizationDto.Contact.Address3
+                },
+                BankAccount = new BankAccount
+                {
+                    AccountNumber = organizationDto.BankAccount.AccountNumber,
+                    AccountHolderName = organizationDto.BankAccount.AccountHolderName,
+                    BankName = organizationDto.BankAccount.BankName,
+                    BranchName = organizationDto.BankAccount.BranchName,
                 }
             };
 
