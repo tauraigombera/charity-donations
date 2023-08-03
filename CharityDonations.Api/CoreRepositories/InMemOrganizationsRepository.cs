@@ -18,6 +18,12 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
                 Address1 = "Chitimbe",
                 Address2 = "",
                 Address3 = "",
+            },
+            BankAccount = new BankAccount {
+                AccountNumber = "1001577049",
+                AccountHolderName = "Taurai Gombera",
+                BankName = "National Bank",
+                BranchName = "Zomba"
             }
         },
         new Organization()
@@ -27,12 +33,18 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
             Mission = "Lorem ipsum",
             Description = "Lorem ipsum",
             ImageUrl = "https://placehold.co/100",
-             Contact = new Contact {
+            Contact = new Contact {
                 Email = "info@crecom.com",
                 PhoneNumber = "0999970111",
                 Address1 = "Chitimbe",
                 Address2 = "",
                 Address3 = "",
+            },
+            BankAccount = new BankAccount {
+                AccountNumber = "1001577049",
+                AccountHolderName = "Taurai Gombera",
+                BankName = "National Bank",
+                BranchName = "Zomba"
             }
         },
         new Organization()
@@ -42,12 +54,18 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
             Mission = "Lorem ipsum",
             Description = "Lorem ipsum",
             ImageUrl = "https://placehold.co/100",
-             Contact = new Contact {
+            Contact = new Contact {
                 Email = "info@yoneko.org",
                 PhoneNumber = "0999970111",
                 Address1 = "Chitimbe",
                 Address2 = "",
                 Address3 = "",
+            },
+            BankAccount = new BankAccount {
+                AccountNumber = "1001577049",
+                AccountHolderName = "Taurai Gombera",
+                BankName = "National Bank",
+                BranchName = "Zomba"
             }
         }
     };
