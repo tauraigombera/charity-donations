@@ -79,3 +79,4 @@ D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\Newtonsoft.Json.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -3,6 +3,7 @@ using CharityDonations.Api.CoreRepositories;
 using CharityDonations.Api.CoreRepositories.Repositories;
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 
@@ -21,20 +22,44 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+/*---------------------------------*/
+//middleware configuration for JWT authentication - JWT access token provided by Auth0
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, c =>
+     {
+         c.Authority = $"https://{builder.Configuration["Auth0:Domain"]}";
+         c.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+         {
+             ValidAudience = builder.Configuration["Auth0:Audience"],
+             ValidIssuer = $"{builder.Configuration["Auth0:Domain"]}"
+         };
+     });
+
+builder.Services.AddAuthorization(o =>
+    {
+        o.AddPolicy("charitydonations:read-write", p => p.
+            RequireAuthenticatedUser().
+            RequireClaim("scope", "charitydonations:read-write"));
+    });
+
+/*---------------------------------*/
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 
+/*---------------------------------*/
 // Custom JSON serialization options
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
+/*---------------------------------*/
 // Read DB connection string from .NET secret manager
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
 builder.Services.AddSqlServer<ApiDbContext>(connectionString);
  
 var app = builder.Build();
 
+/*---------------------------------*/
 //apply migrations to database
 await app.Services.InitializeDbAsync();
 
@@ -48,6 +73,11 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Charity Donations");
     c.RoutePrefix = string.Empty;
 });
+
+/*---------------------------------*/
+//configured middleware for authentication and authorization
+app.UseAuthentication();
+app.UseAuthorization();
 
 /*---------------------------------*/
 // endpoint registrations

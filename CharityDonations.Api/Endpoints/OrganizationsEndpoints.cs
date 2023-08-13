@@ -8,7 +8,6 @@ public static class OrganizationsEndpoints
     const string GetOrganizationEndpointName = "GetOrganization";
     public static RouteGroupBuilder MapOrganizationsEndpoints(this IEndpointRouteBuilder routes)
     {
-
         var group = routes.MapGroup("/organizations")
                 .WithParameterValidation();
 
@@ -18,8 +17,7 @@ public static class OrganizationsEndpoints
             var organizations = await repository.GetAllAsync();
             var organizationDtos = organizations.Select(organization => organization.AsDto());
             return Results.Ok(organizationDtos);
-        });
-
+        }).RequireAuthorization("charitydonations:read-write");
 
         //Get organization by id
         group.MapGet("/{id}", async (IOrganizationsRepository repository, int id) => 
@@ -27,7 +25,7 @@ public static class OrganizationsEndpoints
             Organization? organization = await repository.GetAsync(id);
             return organization is not null ? Results.Ok(organization.AsDto()) : Results.NotFound();
         })
-        .WithName(GetOrganizationEndpointName);
+        .WithName(GetOrganizationEndpointName).RequireAuthorization("charitydonations:read-write");
 
         //Post an organization
         group.MapPost("/", async (IOrganizationsRepository repository, CreateOrganizationDto organizationDto) =>
@@ -57,7 +55,7 @@ public static class OrganizationsEndpoints
 
             await repository.CreateAsync(organization);
             return Results.CreatedAtRoute(GetOrganizationEndpointName, new {id = organization.Id}, organization);
-        });
+        }).RequireAuthorization("charitydonations:read-write");
 
         //Update an organization
         group.MapPut("/{id}", async (IOrganizationsRepository repository, int id, UpdateOrganizationDto updatedOrganizationDto) =>
@@ -83,7 +81,7 @@ public static class OrganizationsEndpoints
             await repository.UpdateAsync(existingOrganization);
 
             return Results.NoContent();
-        });
+        }).RequireAuthorization("charitydonations:read-write");
 
         //Delete an organization
         group.MapDelete("/{id}", async (IOrganizationsRepository repository, int id) =>
@@ -96,7 +94,7 @@ public static class OrganizationsEndpoints
             } 
 
             return Results.NoContent();
-        });
+        }).RequireAuthorization("charitydonations:read-write");
 
         return group;
     }
