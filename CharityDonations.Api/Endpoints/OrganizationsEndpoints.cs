@@ -17,7 +17,7 @@ public static class OrganizationsEndpoints
             var organizations = await repository.GetAllAsync();
             var organizationDtos = organizations.Select(organization => organization.AsDto());
             return Results.Ok(organizationDtos);
-        }).RequireAuthorization("charitydonations:read-write");
+        });
 
         //Get organization by id
         group.MapGet("/{id}", async (IOrganizationsRepository repository, int id) => 
