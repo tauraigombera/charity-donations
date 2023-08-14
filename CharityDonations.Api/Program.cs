@@ -25,39 +25,21 @@ builder.Services.AddSwaggerGen(options =>
 /*---------------------------------*/
 //middleware configuration for JWT authentication - JWT access token provided by Auth0
 
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//      .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, c =>
-//      {
-//          c.Authority = $"https://{builder.Configuration["Auth0:Domain"]}";
-//          c.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-//          {
-//              ValidAudience = builder.Configuration["Auth0:Audience"],
-//              ValidIssuer = $"{builder.Configuration["Auth0:Domain"]}"
-//          };
-//      });
-
-// builder.Services.AddAuthorization(o =>
-//     {
-//         o.AddPolicy("charitydonations:read-write", p => p.
-//             RequireAuthenticatedUser().
-//             RequireClaim("scope", "charitydonations:read-write"));
-//     });
-
 builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.Authority = builder.Configuration["Auth0:Domain"];
-    options.Audience = builder.Configuration["Auth0:Audience"];
-});
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["Auth0:Domain"];
+        options.Audience = builder.Configuration["Auth0:Audience"];
+    });
 
 builder.Services.AddAuthorization(o =>
     {
-        o.AddPolicy("charitydonations:read-write", p => p.
+        o.AddPolicy("organizations:read-write", p => p.
             RequireAuthenticatedUser().
-            RequireClaim("permissions", "charitydonations:read-write"));
+            RequireClaim("permissions", "organizations:read-write"));
     });
 
 /*---------------------------------*/
