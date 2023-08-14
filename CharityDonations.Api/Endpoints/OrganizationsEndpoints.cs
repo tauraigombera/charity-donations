@@ -17,7 +17,7 @@ public static class OrganizationsEndpoints
             var organizations = await repository.GetAllAsync();
             var organizationDtos = organizations.Select(organization => organization.AsDto());
             return Results.Ok(organizationDtos);
-        }).RequireAuthorization("organizations:read-write");
+        });
 
         //Get organization by id
         group.MapGet("/{id}", async (IOrganizationsRepository repository, int id) => 
@@ -25,7 +25,7 @@ public static class OrganizationsEndpoints
             Organization? organization = await repository.GetAsync(id);
             return organization is not null ? Results.Ok(organization.AsDto()) : Results.NotFound();
         })
-        .WithName(GetOrganizationEndpointName).RequireAuthorization("organizations:read-write");
+        .WithName(GetOrganizationEndpointName);
 
         //Post an organization
         group.MapPost("/", async (IOrganizationsRepository repository, CreateOrganizationDto organizationDto) =>
