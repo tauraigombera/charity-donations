@@ -35,7 +35,7 @@ public class AuthenticationRepository : IAuthenticationRepository
 
         var result = await _userManager.CreateAsync(user, request.Password);
 
-        if(!result.Succeeded)
+        if (!result.Succeeded)
         {
             throw new ArgumentException($"Unable to register user {request.Username} errors: {GetErrorsText(result.Errors)}");
         }
@@ -44,12 +44,8 @@ public class AuthenticationRepository : IAuthenticationRepository
     }
     public async Task<string> Login(LoginRequestDto request)
     {
-        var user = await _userManager.FindByNameAsync(request.Username);
-
-        if(user is null)
-        {
-            user = await _userManager.FindByEmailAsync(request.Username);
-        }
+        var user = await _userManager.FindByNameAsync(request.Username) 
+                   ?? await _userManager.FindByEmailAsync(request.Username);
 
         if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
         {
@@ -58,8 +54,8 @@ public class AuthenticationRepository : IAuthenticationRepository
 
         var authClaims = new List<Claim>
         {
-            new(ClaimTypes.Name, user.UserName),
-            new(ClaimTypes.Email, user.Email),
+            new(ClaimTypes.Name, user.UserName ?? ""),
+            new(ClaimTypes.Email, user.Email ?? ""),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 
@@ -69,7 +65,7 @@ public class AuthenticationRepository : IAuthenticationRepository
     }
     private JwtSecurityToken GetToken(IEnumerable<Claim> authClaims)
     {
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Auth0:Domain"] ?? ""));
 
         var token = new JwtSecurityToken(
             issuer: _configuration["JWT:ValidIssuer"],
@@ -80,7 +76,7 @@ public class AuthenticationRepository : IAuthenticationRepository
 
         return token;
     }
-    private string GetErrorsText(IEnumerable<IdentityError> errors)
+    private static string GetErrorsText(IEnumerable<IdentityError> errors)
     {
         return string.Join(", ", errors.Select(error => error.Description).ToArray());
     }
