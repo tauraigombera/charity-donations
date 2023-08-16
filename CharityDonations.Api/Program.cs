@@ -50,7 +50,9 @@ builder.Services.AddAuthorization(o =>
     });
 
 /*---------------------------------*/
+//register services in the DI system
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
+builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 
 /*---------------------------------*/
 // Custom JSON serialization options
@@ -88,6 +90,7 @@ app.UseAuthorization();
 
 /*---------------------------------*/
 // endpoint registrations
+app.MapAuthenticationEndpoints();
 app.MapOrganizationsEndpoints();
 
 app.Run();
