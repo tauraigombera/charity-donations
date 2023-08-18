@@ -86,3 +86,4 @@ D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+D:\Projects\dotnet_projects\charity-donations\CharityDonations.Api\bin\Debug\net7.0\RestSharp.dll
