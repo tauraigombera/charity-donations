@@ -1,21 +1,18 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using CharityDonations.Api.Dtos.RequestDtos;
+﻿using CharityDonations.Api.Dtos.RequestDtos;
 using CharityDonations.Api.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 
 namespace CharityDonations.Api.CoreRepositories.Repositories;
 public class AuthenticationRepository : IAuthenticationRepository
 {
+    private readonly IConfiguration _config;
     private readonly UserManager<User> _userManager;
-    private readonly IConfiguration _configuration;
-
-    public AuthenticationRepository (UserManager<User> userManager, IConfiguration configuration)
+    public AuthenticationRepository (UserManager<User> userManager, IConfiguration config)
     {
         _userManager = userManager;
-        _configuration = configuration;
+        _config = config;
     }
     public async Task<string> Register(RegisterRequestDto request)
     {
@@ -52,29 +49,30 @@ public class AuthenticationRepository : IAuthenticationRepository
             throw new ArgumentException($"Unable to authenticate user {request.Username}");
         }
 
-        var authClaims = new List<Claim>
-        {
-            new(ClaimTypes.Name, user.UserName ?? ""),
-            new(ClaimTypes.Email, user.Email ?? ""),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        };
+        var jwtAccessToken = GetToken();
 
-        var token = GetToken(authClaims);
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return jwtAccessToken;
     }
-    private JwtSecurityToken GetToken(IEnumerable<Claim> authClaims)
+    private string GetToken()
     {
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Auth0:Domain"] ?? ""));
+        var client = new RestClient("https://dev-pt56e4yxyx2z3ooq.us.auth0.com/oauth/token");
+        var request = new RestRequest("/", Method.Post);
+        request.AddHeader("content-type", "application/json");
 
-        var token = new JwtSecurityToken(
-            issuer: _configuration["JWT:ValidIssuer"],
-            audience: _configuration["JWT:ValidAudience"],
-            expires: DateTime.Now.AddHours(3),
-            claims: authClaims,
-            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
+        // Auth0 keys
+        var clientId = _config["Auth0:ClientId"];
+        var clientSecret = _config["Auth0:ClientSecret"];
+        var audience = _config["Auth0:Audience"];
 
-        return token;
+        request.AddParameter("application/json", $"{{\"client_id\":\"{clientId}\",\"client_secret\":\"{clientSecret}\",\"audience\":\"{audience}\",\"grant_type\":\"client_credentials\"}}", ParameterType.RequestBody);
+
+        var response = client.Execute(request).Content;
+
+        JObject jsonResponse = JObject.Parse(response);
+
+        string jwtAccessToken = jsonResponse["access_token"].ToString();
+
+        return jwtAccessToken;
     }
     private static string GetErrorsText(IEnumerable<IdentityError> errors)
     {
