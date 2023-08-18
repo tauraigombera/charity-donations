@@ -85,6 +85,16 @@ $sa_password = "[YOUR SA PASSWORD HERE]"
 dotnet user-secrets set "ConnectionStrings: CharityOrganizationsContext" "Server=localhost; Database=CharityDonationsApi; User Id=sa; Password=$sa_password;TrustServerCertificate=True"
 ```
 
+# safe storage of secret keys to .NET secret manager
+
+```bash
+dotnet user-secrets set "Auth0:ClientId" "[YOUR AUTH0 CLIENT_ID HERE]"
+dotnet user-secrets set "Auth0:ClientSecret" "[YOUR AUTH0 CLIENT_SECRET HERE]"
+
+dotnet user-secrets set "Auth0:Domain" "[YOUR AUTH0 DOMAIN HERE]"
+dotnet user-secrets set "Auth0:Audience" "[YOUR AUTH0 AUDIENCE HERE]"
+```
+
 Notice that the sa password is the one that you set before when configuring mssql server. If this command is successfuly excuted, you will see a message, "successfully saved ConnectionStrings... to the secret store".
 
 To see the list of your secrets, run
