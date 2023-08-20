@@ -3,6 +3,7 @@ using CharityDonations.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CharityDonations.Api.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class CharityOrganizationsContextModelSnapshot : ModelSnapshot
+    [Migration("20230730105619_CreateContacts")]
+    partial class CreateContacts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,46 +24,7 @@ namespace CharityDonations.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CharityDonations.Api.Models.BankAccount", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AccountHolderName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("AccountNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("BankName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("BranchName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("OrganizationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId")
-                        .IsUnique();
-
-                    b.ToTable("BankAccounts");
-                });
-
-            modelBuilder.Entity("CharityDonations.Api.Models.Contact", b =>
+            modelBuilder.Entity("CharityDonations.Api.Entities.Contact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +66,7 @@ namespace CharityDonations.Api.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("CharityDonations.Api.Models.Organization", b =>
+            modelBuilder.Entity("CharityDonations.Api.Entities.Organization", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,29 +99,19 @@ namespace CharityDonations.Api.Migrations
                     b.ToTable("Organizations");
                 });
 
-            modelBuilder.Entity("CharityDonations.Api.Models.BankAccount", b =>
+            modelBuilder.Entity("CharityDonations.Api.Entities.Contact", b =>
                 {
-                    b.HasOne("CharityDonations.Api.Models.Organization", null)
-                        .WithOne("BankAccount")
-                        .HasForeignKey("CharityDonations.Api.Models.BankAccount", "OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CharityDonations.Api.Models.Contact", b =>
-                {
-                    b.HasOne("CharityDonations.Api.Models.Organization", null)
+                    b.HasOne("CharityDonations.Api.Entities.Organization", "Organization")
                         .WithOne("Contact")
-                        .HasForeignKey("CharityDonations.Api.Models.Contact", "OrganizationId")
+                        .HasForeignKey("CharityDonations.Api.Entities.Contact", "OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Organization");
                 });
 
-            modelBuilder.Entity("CharityDonations.Api.Models.Organization", b =>
+            modelBuilder.Entity("CharityDonations.Api.Entities.Organization", b =>
                 {
-                    b.Navigation("BankAccount")
-                        .IsRequired();
-
                     b.Navigation("Contact")
                         .IsRequired();
                 });

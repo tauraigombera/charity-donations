@@ -31,6 +31,7 @@ The application is built with the following technologies:
 2. Navigate to the root directory of the project in the terminal:
 
    ```bash
+   cd charity-donations
    cd CharityDonations.Api
    ```
 
@@ -81,7 +82,7 @@ Instead of defining connection string in appsettings.json, we are using SecretMa
 
 ```bash
 $sa_password = "[YOUR SA PASSWORD HERE]"
-dotnet user-secrets set "ConnectionStrings: CharityOrganizationsContext" "Server=localhost; Database=CharityOrganizations; User Id=sa; Password=$sa_password;TrustServerCertificate=True"
+dotnet user-secrets set "ConnectionStrings: CharityOrganizationsContext" "Server=localhost; Database=CharityDonationsApi; User Id=sa; Password=$sa_password;TrustServerCertificate=True"
 ```
 
 Notice that the sa password is the one that you set before when configuring mssql server. If this command is successfuly excuted, you will see a message, "successfully saved ConnectionStrings... to the secret store".

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj": {}
+    "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj": {}
   },
   "projects": {
-    "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj": {
+    "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj",
+        "projectUniqueName": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj",
         "projectName": "CharityDonations.Api",
-        "projectPath": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj",
+        "projectPath": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj",
         "packagesPath": "C:\\Users\\taura\\.nuget\\packages\\",
-        "outputPath": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\obj\\",
+        "outputPath": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\taura\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,6 +41,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.9, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[7.0.9, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",

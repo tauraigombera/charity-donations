@@ -1,6 +1,6 @@
-﻿using CharityDonations.Api.Entities;
+﻿using CharityDonations.Api.Models;
 
-namespace CharityDonations.Api.Repositories;
+namespace CharityDonations.Api.CoreRepositories;
 
 public interface IOrganizationsRepository
 {

@@ -1,26 +1,32 @@
 ﻿using CharityDonations.Api.Data;
-using CharityDonations.Api.Entities;
+using CharityDonations.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CharityDonations.Api.Repositories;
+namespace CharityDonations.Api.CoreRepositories.Repositories;
 
 public class OrganizationsRepository : IOrganizationsRepository
 {
-    private readonly CharityOrganizationsContext dbContext;
+    private readonly ApiDbContext dbContext;
 
-    public OrganizationsRepository(CharityOrganizationsContext dbContext)
+    public OrganizationsRepository(ApiDbContext dbContext)
     {
         this.dbContext = dbContext;
     }
 
     public async Task<IEnumerable<Organization>> GetAllAsync()
     {
-        return await dbContext.Organizations.AsNoTracking().ToListAsync();
+        return await dbContext.Organizations
+            .Include(x => x.Contact)
+            .Include(x => x.BankAccount)
+            .AsNoTracking().ToListAsync();
     }
 
     public async Task<Organization?> GetAsync(int id)
     {
-        return await dbContext.Organizations.FindAsync(id);
+        return await dbContext.Organizations
+            .Include(x => x.Contact)
+            .Include(x => x.BankAccount)
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task CreateAsync(Organization organization)

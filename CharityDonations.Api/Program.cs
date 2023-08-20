@@ -1,6 +1,10 @@
+using System.Text.Json.Serialization;
+using CharityDonations.Api.CoreRepositories;
+using CharityDonations.Api.CoreRepositories.Repositories;
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
-using CharityDonations.Api.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,14 +22,44 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+/*---------------------------------*/
+//middleware configuration for JWT authentication - JWT access token provided by Auth0
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(options =>
+    {
+        options.Authority = builder.Configuration["Auth0:Domain"];
+        options.Audience = builder.Configuration["Auth0:Audience"];
+    });
+
+builder.Services.AddAuthorization(o =>
+    {
+        o.AddPolicy("organizations:read-write", p => p.
+            RequireAuthenticatedUser().
+            RequireClaim("permissions", "organizations:read-write"));
+    });
+
+/*---------------------------------*/
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 
+/*---------------------------------*/
+// Custom JSON serialization options
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
+/*---------------------------------*/
 // Read DB connection string from .NET secret manager
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
-builder.Services.AddSqlServer<CharityOrganizationsContext>(connectionString);
+builder.Services.AddSqlServer<ApiDbContext>(connectionString);
  
 var app = builder.Build();
 
+/*---------------------------------*/
 //apply migrations to database
 await app.Services.InitializeDbAsync();
 
@@ -39,6 +73,11 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Charity Donations");
     c.RoutePrefix = string.Empty;
 });
+
+/*---------------------------------*/
+//configured middleware for authentication and authorization
+app.UseAuthentication();
+app.UseAuthorization();
 
 /*---------------------------------*/
 // endpoint registrations

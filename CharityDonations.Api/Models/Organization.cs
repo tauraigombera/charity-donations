@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CharityDonations.Api.Entities;
+namespace CharityDonations.Api.Models;
 public class Organization
 {
     public int Id { get; set; }
@@ -16,4 +16,6 @@ public class Organization
     [Url]
     [StringLength(100)]
     public required string ImageUrl { get; set; }
+    public required Contact Contact { get; set; }
+    public required BankAccount BankAccount { get; set; }
 }

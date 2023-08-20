@@ -1,6 +1,6 @@
-﻿using CharityDonations.Api.Entities;
+﻿using CharityDonations.Api.Models;
 
-namespace CharityDonations.Api.Repositories;
+namespace CharityDonations.Api.CoreRepositories;
 
 public class InMemOrganizationsRepository : IOrganizationsRepository
 {
@@ -12,6 +12,19 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
             Mission = "Lorem ipsum",
             Description = "Lorem ipsum",
             ImageUrl = "https://placehold.co/100",
+            Contact = new Contact {
+                Email = "info@ofest.com",
+                PhoneNumber = "0999970111",
+                Address1 = "Chitimbe",
+                Address2 = "",
+                Address3 = "",
+            },
+            BankAccount = new BankAccount {
+                AccountNumber = "1001577049",
+                AccountHolderName = "Taurai Gombera",
+                BankName = "National Bank",
+                BranchName = "Zomba"
+            }
         },
         new Organization()
         {
@@ -20,6 +33,19 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
             Mission = "Lorem ipsum",
             Description = "Lorem ipsum",
             ImageUrl = "https://placehold.co/100",
+            Contact = new Contact {
+                Email = "info@crecom.com",
+                PhoneNumber = "0999970111",
+                Address1 = "Chitimbe",
+                Address2 = "",
+                Address3 = "",
+            },
+            BankAccount = new BankAccount {
+                AccountNumber = "1001577049",
+                AccountHolderName = "Taurai Gombera",
+                BankName = "National Bank",
+                BranchName = "Zomba"
+            }
         },
         new Organization()
         {
@@ -28,6 +54,19 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
             Mission = "Lorem ipsum",
             Description = "Lorem ipsum",
             ImageUrl = "https://placehold.co/100",
+            Contact = new Contact {
+                Email = "info@yoneko.org",
+                PhoneNumber = "0999970111",
+                Address1 = "Chitimbe",
+                Address2 = "",
+                Address3 = "",
+            },
+            BankAccount = new BankAccount {
+                AccountNumber = "1001577049",
+                AccountHolderName = "Taurai Gombera",
+                BankName = "National Bank",
+                BranchName = "Zomba"
+            }
         }
     };
 
