@@ -2,7 +2,7 @@
 
 namespace CharityDonations.Api.Repositories;
 
-public interface IAuthenticationRepository
+public interface IAuthRepository
 {
     Task<string> Register(RegisterRequestDto request);
     Task<string> Login(LoginRequestDto request);

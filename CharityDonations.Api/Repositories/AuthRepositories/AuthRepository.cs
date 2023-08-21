@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace CharityDonations.Api.Repositories.CoreRepositories;
-public class AuthenticationRepository : IAuthenticationRepository
+namespace CharityDonations.Api.Repositories.AuthRepositories;
+public class AuthRepository : IAuthRepository
 {
     private readonly IConfiguration _config;
     private readonly UserManager<User> _userManager;
-    public AuthenticationRepository (UserManager<User> userManager, IConfiguration config)
+    public AuthRepository (UserManager<User> userManager, IConfiguration config)
     {
         _userManager = userManager;
         _config = config;

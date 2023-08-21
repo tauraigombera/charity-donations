@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using CharityDonations.Api.Repositories.AuthRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +53,7 @@ builder.Services.AddAuthorization(o =>
 /*---------------------------------*/
 //register services in the DI system
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
-builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 /*---------------------------------*/
 // Custom JSON serialization options
