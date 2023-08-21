@@ -31,8 +31,6 @@ D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\n
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.Connections.Abstractions.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.CookiePolicy.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.Cors.dll
-D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.Cryptography.Internal.dll
-D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.DataProtection.Abstractions.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.DataProtection.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.AspNetCore.DataProtection.Extensions.dll
@@ -125,8 +123,6 @@ D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\n
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Hosting.Abstractions.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Hosting.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Http.dll
-D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Identity.Core.dll
-D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Identity.Stores.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Localization.Abstractions.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Localization.dll
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\refs\Microsoft.Extensions.Logging.Abstractions.dll
@@ -471,3 +467,9 @@ D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\obj\Debug\n
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\obj\Debug\net7.0\CharityDonations.Tests.pdb
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\obj\Debug\net7.0\CharityDonations.Tests.genruntimeconfig.cache
 D:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\obj\Debug\net7.0\ref\CharityDonations.Tests.dll
+d:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+d:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+d:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+d:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+d:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+d:\Projects\dotnet_projects\charity-donations\CharityDonations.Tests\bin\Debug\net7.0\RestSharp.dll

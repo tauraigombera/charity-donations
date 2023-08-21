@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "B0njvZXRVnNLcXV79G7HPas8BQZJ6WcCW5AMLEXh2M0jTdP0GzYXVv6PEHWIXjKtfGrxvb/x+Xjh8zgdhzzbYw==",
-=======
-  "dgSpecHash": "ez/I7YtG50uoSxTVdDoGzPelopYrPJWpF6HLPqvU9vArgrtNWraA0ur+uMQ4cOhGAfKyeuDZDIc1MDYgCvrdsA==",
->>>>>>> tests
+  "dgSpecHash": "U/DIULUxtajqmc7FqrisI8x/TTq0/C3YA4bC0Rww0zGYBSjOwi7Y5hQbhjmCKBV+8VVYrxA9tGxLxIy9bbl5oA==",
   "success": true,
   "projectFilePath": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj",
   "expectedPackageFiles": [
@@ -94,5 +90,12 @@
     "C:\\Users\\taura\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\taura\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
