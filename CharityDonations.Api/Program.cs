@@ -53,7 +53,7 @@ builder.Services.AddAuthorization(o =>
 /*---------------------------------*/
 //register services in the DI system
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
 
 /*---------------------------------*/
 // Custom JSON serialization options
