@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using CharityDonations.Api.Repositories.AuthRepositories;
+using CharityDonations.Api.Services;
+using CharityDonations.Api.Services.AuthTokenServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,9 +53,11 @@ builder.Services.AddAuthorization(o =>
     });
 
 /*---------------------------------*/
-//register services in the DI system
+//register services in the Dependency Injection system
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<IAuthTokenService, AuthTokenService>();
 
 /*---------------------------------*/
 // Custom JSON serialization options
