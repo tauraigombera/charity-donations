@@ -25,9 +25,9 @@ public class AuthTokenService : IAuthTokenService
 
         var response = client.Execute(request).Content;
 
-        JObject jsonResponse = JObject.Parse(response);
+        JObject jsonResponse = JObject.Parse(response!);
 
-        string jwtAccessToken = jsonResponse["access_token"].ToString();
+        string jwtAccessToken = jsonResponse["access_token"]!.ToString();
 
         return jwtAccessToken;
     }
