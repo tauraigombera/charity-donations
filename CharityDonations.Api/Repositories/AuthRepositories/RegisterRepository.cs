@@ -6,12 +6,12 @@ namespace CharityDonations.Api.Repositories.AuthRepositories;
 
 public class RegisterRepository : IRegisterRepository
 {
-    private readonly IConfiguration _config;
     private readonly UserManager<User> _userManager;
-    public RegisterRepository (UserManager<User> userManager, IConfiguration config)
+    private readonly ILoginRepository _loginRepository;
+    public RegisterRepository (UserManager<User> userManager, IConfiguration config, ILoginRepository loginRepository)
     {
         _userManager = userManager;
-        _config = config;
+        _loginRepository = loginRepository;
     }
     public async Task<string> Register(RegisterRequestDto request)
     {
@@ -36,7 +36,7 @@ public class RegisterRepository : IRegisterRepository
             throw new ArgumentException($"Unable to register user {request.Username} errors: {GetErrorsText(result.Errors)}");
         }
         
-        return await Login(new LoginRequestDto(request.Email, request.Password));
+        return await _loginRepository.Login(new LoginRequestDto(request.Email, request.Password));
     }
 
     private static string GetErrorsText(IEnumerable<IdentityError> errors)
