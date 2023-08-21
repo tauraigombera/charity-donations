@@ -1,4 +1,4 @@
-# Charity Donation API Requirements
+# Charity Donation API - Requirements Document
 
 ## 1. Introduction
 
@@ -33,12 +33,14 @@ The Charity Donation API project aims to create a platform that facilitates onli
 
 - The API must provide endpoints for searching and filtering organizations based on name, cause, location, etc.
 
+![ERD Diagram](./ProjectUMLDiagrams/DatabaseERD.png)
+
 ## 3. Non-Functional Requirements
 
 ### 3.1 Security
 
 - User passwords must be encrypted and securely stored.
-- Access to sensitive endpoints should be restricted to authenticated users only.
+- Access to sensitive endpoints should be restricted to authenticated users only through Auth0.
 - Donation transactions and bank account details must be transmitted securely using HTTPS.
 
 ### 3.2 Performance
@@ -53,18 +55,18 @@ The Charity Donation API project aims to create a platform that facilitates onli
 
 ### 3.4 Documentation
 
-- The API should be well-documented with clear instructions on how to use each endpoint.
+- The API should be well-documented with clear instructions on how to use each endpoint using Swagger UI.
 - The codebase should include inline comments and explanations for complex logic.
 
 ## 4. Technology Stack
 
-- Backend: The API should be developed with C# in .NET 7
+- Backend: ASP.NET Core with C#
 - Frontend: Next.js (optional if a frontend is desired for the API)
-- Database: SQL Server, MySQL, or PostgreSQL
+- Database: SQL Server
 
 ## 5. Deployment
 
-- The API and frontend (if applicable) should be deployable on cloud platforms like Azure or AWS.
+- The API and frontend (if applicable) should be deployable on cloud platforms like Azure, AWS, or Heroku.
 
 ## 6. Open-Source
 

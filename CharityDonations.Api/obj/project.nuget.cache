@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FysOXDzGFB0bmSrsJmBXuRq4qhZHVRmBe8TH6MIZS4Fh7qzB21SCNSJVH2HiS5APCsMN81wZLDGkc7gTx9bbPQ==",
+  "dgSpecHash": "B0njvZXRVnNLcXV79G7HPas8BQZJ6WcCW5AMLEXh2M0jTdP0GzYXVv6PEHWIXjKtfGrxvb/x+Xjh8zgdhzzbYw==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj",
+  "projectFilePath": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\taura\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\taura\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
