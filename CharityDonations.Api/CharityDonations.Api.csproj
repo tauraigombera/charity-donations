@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Dtos\OrganizationDtos\" />
+    <Folder Include="Services\AuthTokenService\" />
   </ItemGroup>
 
 </Project>
