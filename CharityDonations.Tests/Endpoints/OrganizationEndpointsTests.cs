@@ -1,5 +1,5 @@
 ﻿using CharityDonations.Api.BankAccountDtos;
-using CharityDonations.Api.CoreRepositories;
+using CharityDonations.Api.Repositories;
 using CharityDonations.Api.Dtos.ContactDtos;
 using CharityDonations.Api.Dtos.OrganizationDtos;
 using CharityDonations.Api.Endpoints;

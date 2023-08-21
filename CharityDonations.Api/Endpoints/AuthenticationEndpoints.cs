@@ -1,4 +1,4 @@
-﻿using CharityDonations.Api.CoreRepositories;
+﻿using CharityDonations.Api.Repositories;
 using CharityDonations.Api.Dtos.RequestDtos;
 using Microsoft.AspNetCore.Mvc;
 

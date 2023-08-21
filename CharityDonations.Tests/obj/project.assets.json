@@ -9989,11 +9989,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Tests\\CharityDonations.Tests.csproj",
+      "projectUniqueName": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Tests\\CharityDonations.Tests.csproj",
       "projectName": "CharityDonations.Tests",
-      "projectPath": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Tests\\CharityDonations.Tests.csproj",
+      "projectPath": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Tests\\CharityDonations.Tests.csproj",
       "packagesPath": "C:\\Users\\taura\\.nuget\\packages\\",
-      "outputPath": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Tests\\obj\\",
+      "outputPath": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\taura\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10011,8 +10011,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj": {
-              "projectPath": "d:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj"
+            "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj": {
+              "projectPath": "D:\\Projects\\dotnet_projects\\charity-donations\\CharityDonations.Api\\CharityDonations.Api.csproj"
             }
           }
         }

@@ -1,6 +1,6 @@
 ﻿using CharityDonations.Api.Models;
 
-namespace CharityDonations.Api;
+namespace CharityDonations.Api.Repositories;
 
 public interface IBankAccountRepository
 {

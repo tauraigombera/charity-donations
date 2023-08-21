@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace CharityDonations.Api.CoreRepositories.Repositories;
+namespace CharityDonations.Api.Repositories.CoreRepositories;
 public class AuthenticationRepository : IAuthenticationRepository
 {
     private readonly IConfiguration _config;

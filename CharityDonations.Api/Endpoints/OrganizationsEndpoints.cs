@@ -1,5 +1,5 @@
 ﻿using CharityDonations.Api.Models;
-using CharityDonations.Api.CoreRepositories;
+using CharityDonations.Api.Repositories;
 using CharityDonations.Api.Dtos.OrganizationDtos;
 using Microsoft.AspNetCore.Http.HttpResults;
 
