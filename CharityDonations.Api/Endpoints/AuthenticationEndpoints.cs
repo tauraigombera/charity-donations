@@ -11,13 +11,13 @@ public static class AuthenticationEndpoints
         var group = routes.MapGroup("/User")
                 .WithParameterValidation();
 
-        group.MapPost("/login", async ([FromBody] LoginRequestDto request, IAuthRepository authService) =>
+        group.MapPost("/login", async ([FromBody] LoginRequestDto request, ILoginRepository authService) =>
         {
             var response = await authService.Login(request);
             return Results.Ok(response);
         });
 
-        group.MapPost("/register", async ([FromBody] RegisterRequestDto request, IAuthRepository authService) =>
+        group.MapPost("/register", async ([FromBody] RegisterRequestDto request, IRegisterRepository authService) =>
         {
             var response = await authService.Register(request);
             return Results.Ok(response);
