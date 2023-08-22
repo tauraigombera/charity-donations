@@ -4,5 +4,5 @@ namespace CharityDonations.Api.Repositories;
 
 public interface IRegisterRepository
 {
-    Task<string> Register(RegisterRequestDto request);
+    Task<string> Register(UserRequestDto userRequest);
 }

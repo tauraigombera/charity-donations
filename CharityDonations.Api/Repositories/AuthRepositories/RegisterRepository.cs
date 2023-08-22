@@ -15,35 +15,35 @@ public class RegisterRepository : IRegisterRepository
     }
 
     //register user
-    public async Task<string> Register(RegisterRequestDto request)
+    public async Task<string> Register(UserRequestDto userRequest)
     {
-        var userByEmail = await _userManager.FindByEmailAsync(request.Email);
-        var userByUsername = await _userManager.FindByNameAsync(request.Username);
+        var userByEmail = await _userManager.FindByEmailAsync(userRequest.Email);
+        var userByUsername = await _userManager.FindByNameAsync(userRequest.Username);
 
         if (userByEmail is not null || userByUsername is not null)
         {
             throw new ArgumentException("User with the provided email or username already exists.");
         }
 
-        var newUser = CreateUser(request);
+        var newUser = CreateUser(userRequest);
 
-        var result = await _userManager.CreateAsync(newUser, request.Password);
+        var result = await _userManager.CreateAsync(newUser, userRequest.Password);
 
         if (!result.Succeeded)
         {
-            throw new ArgumentException($"Unable to register user {request.Username} errors: {GetErrorsText(result.Errors)}");
+            throw new ArgumentException($"Unable to register user {userRequest.Username} errors: {GetErrorsText(result.Errors)}");
         }
         
-        return await _loginRepository.Login(new LoginRequestDto(request.Email, request.Password));
+        return await _loginRepository.Login(new LoginRequestDto(userRequest.Email, userRequest.Password));
     }
 
     //Create user
-    private static User CreateUser(RegisterRequestDto request)
+    private static User CreateUser(UserRequestDto userRequest)
     {
         return new User
         {
-            Email = request.Email,
-            UserName = request.Username,
+            Email = userRequest.Email,
+            UserName = userRequest.Username,
             SecurityStamp = Guid.NewGuid().ToString()
         };
     }

@@ -5,12 +5,12 @@ namespace CharityDonations.Api.Repositories.CoreRepositories;
 
 public class UserRepository : IUserRepository
 {
-    public User CreateAsync(RegisterRequestDto registerRequest)
+    public User CreateAsync(UserRequestDto userRequest)
     {
         return new User
         {
-            Email = registerRequest.Email,
-            UserName = registerRequest.Username,
+            Email = userRequest.Email,
+            UserName = userRequest.Username,
             SecurityStamp = Guid.NewGuid().ToString()
         };
     }

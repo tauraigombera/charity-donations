@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace CharityDonations.Api.Dtos.RequestDtos;
-public record RegisterRequestDto
+public record UserRequestDto
 (
     [Required] string Username,
     [Required] string Email,
