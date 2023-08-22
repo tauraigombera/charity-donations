@@ -1,4 +1,5 @@
-﻿using CharityDonations.Api.Dtos.RequestDtos;
+﻿using CharityDonations.Api.BankAccountDtos;
+using CharityDonations.Api.Dtos.RequestDtos;
 using CharityDonations.Api.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -8,28 +9,26 @@ public class RegisterRepository : IRegisterRepository
 {
     private readonly UserManager<User> _userManager;
     private readonly ILoginRepository _loginRepository;
-    public RegisterRepository (UserManager<User> userManager, IConfiguration config, ILoginRepository loginRepository)
+    public RegisterRepository (UserManager<User> userManager, ILoginRepository loginRepository)
     {
         _userManager = userManager;
         _loginRepository = loginRepository;
     }
+
+    //register user
     public async Task<string> Register(RegisterRequestDto request)
     {
         var userByEmail = await _userManager.FindByEmailAsync(request.Email);
         var userByUsername = await _userManager.FindByNameAsync(request.Username);
+
         if (userByEmail is not null || userByUsername is not null)
         {
-            throw new ArgumentException($"User with email {request.Email} or username {request.Username} already exists.");
+            throw new ArgumentException("User with the provided email or username already exists.");
         }
 
-        User user = new()
-        {
-            Email = request.Email,
-            UserName = request.Username,
-            SecurityStamp = Guid.NewGuid().ToString()
-        };
+        var newUser = CreateUser(request);
 
-        var result = await _userManager.CreateAsync(user, request.Password);
+        var result = await _userManager.CreateAsync(newUser, request.Password);
 
         if (!result.Succeeded)
         {
@@ -37,6 +36,17 @@ public class RegisterRepository : IRegisterRepository
         }
         
         return await _loginRepository.Login(new LoginRequestDto(request.Email, request.Password));
+    }
+
+    //Create user
+    private static User CreateUser(RegisterRequestDto request)
+    {
+        return new User
+        {
+            Email = request.Email,
+            UserName = request.Username,
+            SecurityStamp = Guid.NewGuid().ToString()
+        };
     }
 
     private static string GetErrorsText(IEnumerable<IdentityError> errors)
