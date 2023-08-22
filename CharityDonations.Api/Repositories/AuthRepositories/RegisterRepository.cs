@@ -1,5 +1,4 @@
-﻿using CharityDonations.Api.BankAccountDtos;
-using CharityDonations.Api.Dtos.RequestDtos;
+﻿using CharityDonations.Api.Dtos.RequestDtos;
 using CharityDonations.Api.Models;
 using Microsoft.AspNetCore.Identity;
 
