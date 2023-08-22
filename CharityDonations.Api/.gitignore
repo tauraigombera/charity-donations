@@ -476,3 +476,17 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Ignore VS Code configuration and cache files
+.vscode/
+.vscode/*
+.vscode/settings.json
+.vscode/*.code-workspace
+.vscode/*.json
+
+# Ignore other cache directories
+.cache/
+.tmp/
+
+# Ignore bin and obj directories
+bin/
+obj/
