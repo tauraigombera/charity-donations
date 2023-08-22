@@ -17,9 +17,9 @@ public static class AuthenticationEndpoints
             return Results.Ok(response);
         });
 
-        group.MapPost("/register", async ([FromBody] RegisterRequestDto request, IRegisterRepository authService) =>
+        group.MapPost("/register", async ([FromBody] UserRequestDto userRequest, IRegisterRepository authService) =>
         {
-            var response = await authService.Register(request);
+            var response = await authService.Register(userRequest);
             return Results.Ok(response);
         });
 
