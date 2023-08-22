@@ -8,10 +8,12 @@ public class RegisterRepository : IRegisterRepository
 {
     private readonly UserManager<User> _userManager;
     private readonly ILoginRepository _loginRepository;
-    public RegisterRepository (UserManager<User> userManager, ILoginRepository loginRepository)
+    private readonly IUserRepository _userRepository;
+    public RegisterRepository (UserManager<User> userManager, ILoginRepository loginRepository, IUserRepository userRepository)
     {
         _userManager = userManager;
         _loginRepository = loginRepository;
+        _userRepository = userRepository;
     }
 
     //register user
@@ -25,7 +27,7 @@ public class RegisterRepository : IRegisterRepository
             throw new ArgumentException("User with the provided email or username already exists.");
         }
 
-        var newUser = CreateUser(userRequest);
+        var newUser = _userRepository.Create(userRequest);
 
         var result = await _userManager.CreateAsync(newUser, userRequest.Password);
 
@@ -35,17 +37,6 @@ public class RegisterRepository : IRegisterRepository
         }
         
         return await _loginRepository.Login(new LoginRequestDto(userRequest.Email, userRequest.Password));
-    }
-
-    //Create user
-    private static User CreateUser(UserRequestDto userRequest)
-    {
-        return new User
-        {
-            Email = userRequest.Email,
-            UserName = userRequest.Username,
-            SecurityStamp = Guid.NewGuid().ToString()
-        };
     }
 
     private static string GetErrorsText(IEnumerable<IdentityError> errors)

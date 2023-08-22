@@ -5,7 +5,7 @@ namespace CharityDonations.Api.Repositories.CoreRepositories;
 
 public class UserRepository : IUserRepository
 {
-    public User CreateAsync(UserRequestDto userRequest)
+    public User Create(UserRequestDto userRequest)
     {
         return new User
         {
