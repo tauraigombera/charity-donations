@@ -32,9 +32,7 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApiDbContext>()
     .AddDefaultTokenProviders();
 
-/*---------------------------------*/
-//middleware configuration for JWT authentication - JWT access token provided by Auth0
-
+// JWT authentication Auth0
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -52,32 +50,28 @@ builder.Services.AddAuthorization(o =>
             RequireClaim("permissions", "organizations:read-write"));
     });
 
-/*---------------------------------*/
-//register services in the Dependency Injection system
+// Dependency Injection registration to IoC system
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IAuthTokenService, AuthTokenService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-/*---------------------------------*/
 // Custom JSON serialization options
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-/*---------------------------------*/
-// Read DB connection string from .NET secret manager
+// DB connection
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
 builder.Services.AddSqlServer<ApiDbContext>(connectionString);
  
 var app = builder.Build();
 
-/*---------------------------------*/
-//apply migrations to database
+//apply migrations
 await app.Services.InitializeDbAsync();
 
-/*---------------------------------*/
 // middleware registrations 
 app.UseSwagger();
 
@@ -88,12 +82,10 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
-/*---------------------------------*/
-//configured middleware for authentication and authorization
+// authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-/*---------------------------------*/
 // endpoint registrations
 app.MapAuthenticationEndpoints();
 app.MapOrganizationsEndpoints();
