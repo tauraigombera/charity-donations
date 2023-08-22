@@ -4,5 +4,5 @@ namespace CharityDonations.Api.Repositories;
 
 public interface ILoginRepository
 {
-     Task<string> Login(LoginRequestDto request);
+     Task<string> Login(LoginRequestDto loginRequest);
 }

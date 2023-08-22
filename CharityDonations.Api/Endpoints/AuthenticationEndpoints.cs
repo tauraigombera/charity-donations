@@ -21,16 +21,16 @@ public static class AuthenticationEndpoints
     }
 
     // login
-    public static async Task<Ok<string>> LoginAsync ([FromBody] LoginRequestDto request, ILoginRepository authService)
+    public static async Task<Ok<string>> LoginAsync ([FromBody] LoginRequestDto loginRequest, ILoginRepository loginRepository)
     {
-        var response = await authService.Login(request);
+        var response = await loginRepository.Login(loginRequest);
         return TypedResults.Ok(response);
     } 
 
     // register
-    public static async Task<Ok<string>> RegisterAsync ([FromBody] UserRequestDto userRequest, IRegisterRepository authService)
+    public static async Task<Ok<string>> RegisterAsync ([FromBody] UserRequestDto userRequest, IRegisterRepository registerRepository)
     {
-        var response = await authService.Register(userRequest);
+        var response = await registerRepository.Register(userRequest);
         return TypedResults.Ok(response);
     }
 }

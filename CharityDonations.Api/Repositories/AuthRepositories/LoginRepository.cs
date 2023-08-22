@@ -14,14 +14,14 @@ public class LoginRepository : ILoginRepository
         _userManager = userManager;
         _authTokenService = authTokenService;
     }
-    public async Task<string> Login(LoginRequestDto request)
+    public async Task<string> Login(LoginRequestDto loginRequest)
     {
-        var user = await _userManager.FindByNameAsync(request.Username) 
-                   ?? await _userManager.FindByEmailAsync(request.Username);
+        var user = await _userManager.FindByNameAsync(loginRequest.Username) 
+                   ?? await _userManager.FindByEmailAsync(loginRequest.Username);
 
-        if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
+        if (user is null || !await _userManager.CheckPasswordAsync(user, loginRequest.Password))
         {
-            throw new ArgumentException($"Unable to authenticate user {request.Username}");
+            throw new ArgumentException($"Unable to authenticate user {loginRequest.Username}");
         }
 
         var jwtAccessToken = _authTokenService.GetToken();
