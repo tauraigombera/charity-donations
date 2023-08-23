@@ -12,7 +12,7 @@ The Charity Donation API project is driven by the goal to modernize charitable g
 
 ### Documentation
 
-You may find out about the project in the documentation [here](https://github.com/tauraigombera/charity-donations/tree/main/Docs)
+You may find out about the project in the documentation [here](https://github.com/tauraigombera/charity-donations/tree/main/Docs/REQUIREMENTS.md)
 
 ## Technologies
 
@@ -120,7 +120,10 @@ The application is built with the following technologies:
 
 ## How to Contribute
 
-Contributions to the project are welcome! Here are the steps to contribute:
+Contributions to the project are welcome!
+Make sure you read and understand [project requirements](https://github.com/tauraigombera/charity-donations/tree/main/Docs/REQUIREMENTS.md) before starting making contributions.
+
+Here are the steps to contribute:
 
 1. Fork the project repository.
 2. Create a new branch for your feature or bug fix.
