@@ -9,35 +9,31 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure API documentation using Swagger
+// Adding support for API documentation using Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    // Retrieve OpenApi configuration from app settings
     var openApiSection = builder.Configuration.GetSection("OpenApi");
-
-    // Define Swagger documentation details
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = openApiSection["Version"] ?? "v1",
         Title = openApiSection["Name"] ?? "Charity Donations API",
-        Description = openApiSection["Description"] ?? "A .NET Minimal API project aims to provide a platform for facilitating online donations to charitable organizations in Malawi.",
+        Description = openApiSection["Description"] ?? "The Charity Donation API project aims to provide a platform for facilitating online donations to charitable organizations in Malawi. It enables individuals to contribute to various causes and make a positive impact on society. The API will integrate with popular payment gateways to securely handle financial transactions.",
     });
 });
 
-// Configure JWT authentication & authorization with Auth0
+// Adding authentication using JWT Bearer token
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-    // Set Auth0 domain and audience
     options.Authority = builder.Configuration["Auth0:Domain"];
     options.Audience = builder.Configuration["Auth0:Audience"];
 });
 
-// Define authorization policy for specific claims
+// Adding authorization policies
 builder.Services.AddAuthorization(o =>
 {
     o.AddPolicy("organizations:read-write", p => p.
@@ -45,40 +41,40 @@ builder.Services.AddAuthorization(o =>
         RequireClaim("permissions", "organizations:read-write"));
 });
 
-// Register the OrganizationsRepository for Dependency Injection
+// Registering the Organizations repository for dependency injection
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 
-// Configure custom JSON serialization options
+// Configuring JSON serialization options
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-// Read DB connection string from .NET secret manager
-var connectionString = builder.Configuration["ConnectionStrings:CharityOrganizationsContext"];
+// Configuring database connection
+var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
 builder.Services.AddSqlServer<ApiDbContext>(connectionString);
  
 var app = builder.Build();
 
-// Apply migrations to the database
+// Initializing the database
 await app.Services.InitializeDbAsync();
 
-// Register Swagger middleware for API documentation
+// Enabling Swagger UI
 app.UseSwagger();
 
+// Configuring Swagger UI
 app.UseSwaggerUI(c =>
 {
-    // Configure Swagger endpoint and route
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Charity Donations");
     c.RoutePrefix = string.Empty;
 });
 
-// Configure middleware for authentication and authorization
+// Enabling authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Register endpoints for the Organizations API
+// Mapping endpoints related to organizations
 app.MapOrganizationsEndpoints();
 
-// Start the application
+// Running the application
 app.Run();
