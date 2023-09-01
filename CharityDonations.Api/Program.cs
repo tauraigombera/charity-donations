@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = openApiSection["Version"] ?? "v1",
         Title = openApiSection["Name"] ?? "Charity Donations API",
-        Description = openApiSection["Description"] ?? "The Charity Donation API project aims to provide a platform for facilitating online donations to charitable organizations in Malawi. It enables individuals to contribute to various causes and make a positive impact on society. The API will integrate with popular payment gateways to securely handle financial transactions.",
+        Description = openApiSection["Description"] ?? "A .NET Minimal API project aims to provide a platform for facilitating online donations to charitable organizations in Malawi.",
     });
 });
 
