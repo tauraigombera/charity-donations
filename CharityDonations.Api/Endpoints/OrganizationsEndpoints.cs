@@ -2,6 +2,7 @@
 using CharityDonations.Api.CoreRepositories;
 using CharityDonations.Api.Dtos.OrganizationDtos;
 using Microsoft.AspNetCore.Http.HttpResults;
+using CharityDonations.Api.Authorization;
 
 namespace CharityDonations.Api.Endpoints;
 public static class OrganizationsEndpoints
@@ -12,13 +13,10 @@ public static class OrganizationsEndpoints
         var group = routes.MapGroup("/organizations").WithParameterValidation();
         
         group.MapGet("/", GetAllOrganizations);
-        group.MapGet("/{id}", GetOrganizationByIdAsync).WithName(GetOrganizationEndpointName);
-        group.MapPost("/", CreateOrganizationAsync).RequireAuthorization();
-        group.MapPut("/{id}", UpdateOrganizationAsync).RequireAuthorization();
-        group.MapDelete("/{id}", DeleteOrganizationAsync).RequireAuthorization(policy => 
-        {
-            policy.RequireRole("Admin");
-        });
+        group.MapGet("/{id}", GetOrganizationByIdAsync).WithName(GetOrganizationEndpointName).RequireAuthorization(Policies.ReadAccess);
+        group.MapPost("/", CreateOrganizationAsync).RequireAuthorization(Policies.WriteAccess);
+        group.MapPut("/{id}", UpdateOrganizationAsync).RequireAuthorization(Policies.WriteAccess);
+        group.MapDelete("/{id}", DeleteOrganizationAsync).RequireAuthorization(Policies.WriteAccess);
 
         return group;
     }

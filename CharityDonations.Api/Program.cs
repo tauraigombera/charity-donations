@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
+using CharityDonations.Api.Authorization;
 using CharityDonations.Api.CoreRepositories;
 using CharityDonations.Api.CoreRepositories.Repositories;
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 
@@ -23,11 +23,20 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 /*---------------------------------*/
-//middleware configuration for JWT authentication - JWT access token provided by Auth0
+//middleware configuration for JWT authentication - JWT access token
 
 builder.Services.AddAuthentication().AddJwtBearer();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options => 
+{
+    //define read access
+    options.AddPolicy(Policies.ReadAccess, builder =>
+    builder.RequireClaim("scope", "organisations:read"));
+
+    //define write access
+    options.AddPolicy(Policies.WriteAccess, builder =>
+    builder.RequireClaim("scope", "organisations:write"));
+} );
 
 // Registering the Organizations repository for dependency injection
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
