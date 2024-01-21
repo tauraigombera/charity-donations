@@ -50,7 +50,7 @@ builder.Services.Configure<JsonOptions>(options =>
 // Configuring database connection
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
 builder.Services.AddSqlServer<ApiDbContext>(connectionString);
- 
+
 var app = builder.Build();
 
 // Initializing the database
@@ -69,6 +69,9 @@ app.UseSwaggerUI(c =>
 // Enabling authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
+
+//Log every request to the API
+app.UseHttpLogging();
 
 // Mapping endpoints related to organizations
 app.MapOrganizationsEndpoints();

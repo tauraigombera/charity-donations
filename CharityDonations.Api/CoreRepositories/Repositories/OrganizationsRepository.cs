@@ -7,10 +7,12 @@ namespace CharityDonations.Api.CoreRepositories.Repositories;
 public class OrganizationsRepository : IOrganizationsRepository
 {
     private readonly ApiDbContext dbContext;
+    private readonly ILogger<OrganizationsRepository> logger;
 
-    public OrganizationsRepository(ApiDbContext dbContext)
+    public OrganizationsRepository(ApiDbContext dbContext, ILogger<OrganizationsRepository> logger)
     {
         this.dbContext = dbContext;
+        this.logger = logger;
     }
 
     public async Task<IEnumerable<Organization>> GetAllAsync()
@@ -33,6 +35,8 @@ public class OrganizationsRepository : IOrganizationsRepository
     {
         dbContext.Organizations.Add(organization);
         await dbContext.SaveChangesAsync();
+
+        logger.LogInformation("Created organization: {Name}.", organization.Name);
     }
 
     public async Task UpdateAsync(Organization updatedOrganization)
