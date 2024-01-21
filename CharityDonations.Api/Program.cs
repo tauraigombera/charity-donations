@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// app registrations
+// Adding support for API documentation using Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = openApiSection["Version"] ?? "v1",
         Title = openApiSection["Name"] ?? "Charity Donations API",
-        Description = openApiSection["Description"] ?? "The Charity Donation API project aims to provide a platform for facilitating online donations to charitable organizations in Malawi. It enables individuals to contribute to various causes and make a positive impact on society. The API will integrate with popular payment gateways to securely handle financial transactions.",
+        Description = openApiSection["Description"] ?? "A .NET Minimal API project aims to provide a platform for facilitating online donations to charitable organizations in Malawi.",
     });
 });
 
@@ -29,45 +29,40 @@ builder.Services.AddAuthentication().AddJwtBearer();
 
 builder.Services.AddAuthorization();
 
-/*---------------------------------*/
+// Registering the Organizations repository for dependency injection
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 
-/*---------------------------------*/
-// Custom JSON serialization options
+// Configuring JSON serialization options
 builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-/*---------------------------------*/
-// Read DB connection string from .NET secret manager
+// Configuring database connection
 var connectionString = builder.Configuration["ConnectionStrings: CharityOrganizationsContext"];
 builder.Services.AddSqlServer<ApiDbContext>(connectionString);
  
 var app = builder.Build();
 
-/*---------------------------------*/
-//apply migrations to database
+// Initializing the database
 await app.Services.InitializeDbAsync();
 
-/*---------------------------------*/
-// middleware registrations 
+// Enabling Swagger UI
 app.UseSwagger();
 
+// Configuring Swagger UI
 app.UseSwaggerUI(c =>
 {
-    //change swagger endpoint to "/" instead of "/swagger"
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Charity Donations");
     c.RoutePrefix = string.Empty;
 });
 
-/*---------------------------------*/
-//configured middleware for authentication and authorization
+// Enabling authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-/*---------------------------------*/
-// endpoint registrations
+// Mapping endpoints related to organizations
 app.MapOrganizationsEndpoints();
 
+// Running the application
 app.Run();
