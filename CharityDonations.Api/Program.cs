@@ -25,22 +25,9 @@ builder.Services.AddSwaggerGen(options =>
 /*---------------------------------*/
 //middleware configuration for JWT authentication - JWT access token provided by Auth0
 
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer(options =>
-    {
-        options.Authority = builder.Configuration["Auth0:Domain"];
-        options.Audience = builder.Configuration["Auth0:Audience"];
-    });
+builder.Services.AddAuthentication().AddJwtBearer();
 
-builder.Services.AddAuthorization(o =>
-    {
-        o.AddPolicy("organizations:read-write", p => p.
-            RequireAuthenticatedUser().
-            RequireClaim("permissions", "organizations:read-write"));
-    });
+builder.Services.AddAuthorization();
 
 /*---------------------------------*/
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
