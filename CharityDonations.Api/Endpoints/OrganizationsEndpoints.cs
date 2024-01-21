@@ -13,9 +13,12 @@ public static class OrganizationsEndpoints
         
         group.MapGet("/", GetAllOrganizations);
         group.MapGet("/{id}", GetOrganizationByIdAsync).WithName(GetOrganizationEndpointName);
-        group.MapPost("/", CreateOrganizationAsync).RequireAuthorization("organizations:read-write");
-        group.MapPut("/{id}", UpdateOrganizationAsync).RequireAuthorization("organizations:read-write");
-        group.MapDelete("/{id}", DeleteOrganizationAsync).RequireAuthorization("organizations:read-write");
+        group.MapPost("/", CreateOrganizationAsync).RequireAuthorization();
+        group.MapPut("/{id}", UpdateOrganizationAsync).RequireAuthorization();
+        group.MapDelete("/{id}", DeleteOrganizationAsync).RequireAuthorization(policy => 
+        {
+            policy.RequireRole("Admin");
+        });
 
         return group;
     }
@@ -64,9 +67,6 @@ public static class OrganizationsEndpoints
         await repository.CreateAsync(organization);
         return TypedResults.Created($"/organizations/{organization.Id}", organization);
     }
-            await repository.CreateAsync(organization);
-            return Results.CreatedAtRoute(GetOrganizationEndpointName, new {id = organization.Id}, organization);
-        }).RequireAuthorization();
 
     //Update organization
     public static async Task<Results<NoContent, NotFound>> UpdateOrganizationAsync (IOrganizationsRepository repository, int id, UpdateOrganizationDto updatedOrganizationDto)
@@ -97,26 +97,12 @@ public static class OrganizationsEndpoints
     public static async Task<Results<NoContent, NotFound>> DeleteOrganizationAsync(IOrganizationsRepository repository, int id)
     {
         Organization? organization = await repository.GetAsync(id);
-            return Results.NoContent();
-        }).RequireAuthorization();
-
-        //Delete an organization
-        group.MapDelete("/{id}", async (IOrganizationsRepository repository, int id) =>
-        {
-            Organization? organization = await repository.GetAsync(id);
-
+        
         if (organization is not null)
         {
             await repository.DeleteAsync(id);
         } 
 
         return TypedResults.NoContent();
-            return Results.NoContent();
-        }).RequireAuthorization(policy => 
-        {
-            policy.RequireRole("Admin");
-        });
-
-        return group;
     }
 }
