@@ -84,7 +84,7 @@ public static class OrganizationsEndpoints
             existingOrganization.Contact.Address2 = updatedOrganizationDto.Contact.Address2;
             existingOrganization.Contact.Address3 = updatedOrganizationDto.Contact.Address3;
 
-            await repository.UpdateAsync(existingOrganization);
+            await repository.UpdateAsync(id, existingOrganization);
 
             return TypedResults.NoContent();
         }
@@ -98,7 +98,7 @@ public static class OrganizationsEndpoints
         
         if (organization is not null)
         {
-            await repository.DeleteAsync(id);
+            await repository.DeleteAsync(id, organization);
         } 
 
         return TypedResults.NoContent();

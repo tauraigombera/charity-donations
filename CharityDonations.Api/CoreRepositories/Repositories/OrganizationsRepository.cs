@@ -36,18 +36,21 @@ public class OrganizationsRepository : IOrganizationsRepository
         dbContext.Organizations.Add(organization);
         await dbContext.SaveChangesAsync();
 
-        logger.LogInformation("Created organization: {Name}.", organization.Name);
+        logger.LogInformation("Created an organization: {Name}.", organization.Name);
     }
 
-    public async Task UpdateAsync(Organization updatedOrganization)
+    public async Task UpdateAsync(int id, Organization updatedOrganization)
     {
         dbContext.Update(updatedOrganization);
         await dbContext.SaveChangesAsync();
+
+        logger.LogInformation("Updated an organization with ID: {id}.", id);
     }
 
-     public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id, Organization deletedOrganization)
     {
-        await dbContext.Organizations.Where(organization => organization.Id == id)
-                               .ExecuteDeleteAsync();
+        await dbContext.Organizations.Where(organization => organization.Id == id).ExecuteDeleteAsync();
+
+        logger.LogInformation("Deleted an organization: {Name}.", deletedOrganization.Name);
     }
 }

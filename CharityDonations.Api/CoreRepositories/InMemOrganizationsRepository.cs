@@ -88,7 +88,7 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
         await Task.CompletedTask;
     }
 
-    public async Task UpdateAsync(Organization updatedOrganization)
+    public async Task UpdateAsync(int id, Organization updatedOrganization)
     {
         var index = organizations.FindIndex(organization => organization.Id == updatedOrganization.Id);
         organizations[index] = updatedOrganization;
@@ -96,7 +96,7 @@ public class InMemOrganizationsRepository : IOrganizationsRepository
         await Task.CompletedTask;
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id, Organization organization)
     {
         var index = organizations.FindIndex(organization => organization.Id == id);
         organizations.RemoveAt(index);
