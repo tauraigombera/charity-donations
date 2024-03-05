@@ -1,1 +1,0 @@
-![ERD Diagram](./DatabaseERD.png)
