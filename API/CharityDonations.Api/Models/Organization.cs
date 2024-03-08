@@ -18,5 +18,5 @@ public class Organization
     public required string ImageUrl { get; set; }
     public required Contact Contact { get; set; }
     public required BankAccount BankAccount { get; set; }
-    public List<Donation> Donations {get; set;} = new List<Donation>();
+    public List<Donation>? Donations {get; set;}
 }
