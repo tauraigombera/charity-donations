@@ -11,10 +11,8 @@ public class Donation
     [Required]
     public required DateTime Date {get; set;}
     [Required]
+    public required string DonorName { get; set; } // Placeholder for donor
     public required TransactionStatus TransactionStatus {get; set;}
     public required Organization Organization { get; set; }
-    
-    // Placeholder for donor
-    public required string DonorName { get; set; }
 }
 
