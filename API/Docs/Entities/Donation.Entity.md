@@ -15,10 +15,10 @@ public interface IDonationRepository
     // Get an organization by Id
     void GetById(int Id);
 
-    // Get an donation(s) by organization Id
+    // Get donation(s) by organization Id
     void GetByOrganization(int OrganizationId);
 
-    // Get an donation(s) by user Id
+    // Get donation(s) by user Id
     void GetByUser(int UserId);
 
     // Create a donation
