@@ -57,7 +57,7 @@ namespace CharityDonations.Api.Migrations
                     b.HasIndex("OrganizationId")
                         .IsUnique();
 
-                    b.ToTable("BankAccounts");
+                    b.ToTable("BankAccounts", (string)null);
                 });
 
             modelBuilder.Entity("CharityDonations.Api.Models.Contact", b =>
@@ -99,7 +99,7 @@ namespace CharityDonations.Api.Migrations
                     b.HasIndex("OrganizationId")
                         .IsUnique();
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("CharityDonations.Api.Models.Organization", b =>
@@ -132,7 +132,7 @@ namespace CharityDonations.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Organizations");
+                    b.ToTable("Organizations", (string)null);
                 });
 
             modelBuilder.Entity("CharityDonations.Api.Models.BankAccount", b =>
