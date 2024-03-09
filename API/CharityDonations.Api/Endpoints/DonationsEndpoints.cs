@@ -1,5 +1,6 @@
 ﻿using CharityDonations.Api.Authorization;
 using CharityDonations.Api.CoreRepositories;
+using CharityDonations.Api.CoreRepositories.Repositories;
 using CharityDonations.Api.Dtos.DonationDtos;
 using CharityDonations.Api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -15,8 +16,8 @@ public static class DonationsEndpoints
         var group = routes.MapGroup("/donations").WithParameterValidation();
         
         group.MapGet("/", GetAllDonations);
-        group.MapGet("/{id}", GetDonationByIdAsync).WithName(GetDonationEndpointName).RequireAuthorization(Policies.ReadAccess);
-        // group.MapGet("/{OrganizationId}", GetDonationsByOrganizationIdAsync).WithName(GetDonationsByOrganizationEndpointName).RequireAuthorization(Policies.ReadAccess);
+        group.MapGet("/{id}", GetDonationByIdAsync).WithName(GetDonationEndpointName);
+        group.MapGet("/organization/{OrganizationId}", GetDonationsByOrganizationIdAsync).WithName(GetDonationsByOrganizationEndpointName);
         // group.MapPost("/", CreateDonationAsync).RequireAuthorization(Policies.WriteAccess);
 
         return group;
@@ -35,5 +36,13 @@ public static class DonationsEndpoints
     {
         Donation? donation = await repository.GetAsync(id);
         return donation is not null ? TypedResults.Ok(donation.AsDto()) : TypedResults.NotFound();
+    }
+
+    //Get donation by organization id
+    public static async Task<Results<Ok<List<DonationDto>>, NotFound>> GetDonationsByOrganizationIdAsync(IDonationRepository repository, int organizationId)
+    {
+        IEnumerable<Donation> donations = await repository.GetAllByOrganizationAsync(organizationId);
+      
+        return donations.Any() ? TypedResults.Ok(donations.Select(donation => donation.AsDto()).ToList()) : TypedResults.NotFound();
     }
 }
