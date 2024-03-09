@@ -41,6 +41,9 @@ builder.Services.AddAuthorization(options =>
 // Registering the Organizations repository for dependency injection
 builder.Services.AddScoped<IOrganizationsRepository, OrganizationsRepository>();
 
+// Registering the Donations repository for dependency injection
+builder.Services.AddScoped<IDonationRepository, DonationRepository>();
+
 // Configuring JSON serialization options
 builder.Services.Configure<JsonOptions>(options =>
 {
@@ -75,6 +78,9 @@ app.UseHttpLogging();
 
 // Mapping endpoints related to organizations
 app.MapOrganizationsEndpoints();
+
+// Mapping endpoints related to donations
+app.MapDonationsEndpoints();
 
 // Running the application
 app.Run();
