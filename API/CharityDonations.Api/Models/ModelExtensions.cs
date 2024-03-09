@@ -29,6 +29,7 @@ public static class EntityExtensions
             donation.Organization.AsDto()
         );
     }
+    
     public static ContactDto AsDto(this Contact contact)
     {
         return new ContactDto
