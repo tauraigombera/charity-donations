@@ -19,7 +19,6 @@ public class DonationRepository : IDonationRepository
     {
          return await dbContext.Donations
             .Include(x => x.Organization)
-            .Include(x => x.TransactionStatus)
             .AsNoTracking().ToListAsync();
     }
 
@@ -27,13 +26,12 @@ public class DonationRepository : IDonationRepository
     {
           return await dbContext.Donations
             .Include(x => x.Organization)
-            .Include(x => x.TransactionStatus)
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<IEnumerable<Donation>> GetAllByOrganizationAsync(int organizationId)
+    public async Task<IEnumerable<Donation>> GetAllByOrganizationAsync(int organizationId)
     {
-        throw new NotImplementedException();
+        return await dbContext.Donations.Where(d => d.Id == organizationId).ToListAsync();
     }
 
     // public Task<IEnumerable<Donation>> GetAllByUserAsync(User user)
