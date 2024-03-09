@@ -15,20 +15,20 @@ public class DonationRepository : IDonationRepository
         this.logger = logger;
     }
 
-    public async Task CreateAsync(Donation donation)
-    {
-        dbContext.Donations.Add(donation);
-        await dbContext.SaveChangesAsync();
-
-        logger.LogInformation("A donation has been created by: {Name}.", donation.DonorName);
-    }
-
     public async Task<IEnumerable<Donation>> GetAllAsync()
     {
          return await dbContext.Donations
             .Include(x => x.Organization)
             .Include(x => x.TransactionStatus)
             .AsNoTracking().ToListAsync();
+    }
+
+    public async Task<Donation?> GetAsync(int id)
+    {
+          return await dbContext.Donations
+            .Include(x => x.Organization)
+            .Include(x => x.TransactionStatus)
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public Task<IEnumerable<Donation>> GetAllByOrganizationAsync(int organizationId)
@@ -40,12 +40,12 @@ public class DonationRepository : IDonationRepository
     // {
     //     throw new NotImplementedException();
     // }
-
-    public async Task<Donation?> GetAsync(int id)
+    
+    public async Task CreateAsync(Donation donation)
     {
-          return await dbContext.Donations
-            .Include(x => x.Organization)
-            .Include(x => x.TransactionStatus)
-            .SingleOrDefaultAsync(x => x.Id == id);
+        dbContext.Donations.Add(donation);
+        await dbContext.SaveChangesAsync();
+
+        logger.LogInformation("A donation has been created by: {Name}.", donation.DonorName);
     }
 }
