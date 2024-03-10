@@ -18,7 +18,7 @@ public static class DonationsEndpoints
         group.MapGet("/", GetAllDonations);
         group.MapGet("/{id}", GetDonationByIdAsync).WithName(GetDonationEndpointName);
         group.MapGet("/organization/{OrganizationId}", GetDonationsByOrganizationIdAsync).WithName(GetDonationsByOrganizationEndpointName);
-        // group.MapPost("/", CreateDonationAsync).RequireAuthorization(Policies.WriteAccess);
+        group.MapPost("/", CreateDonationAsync);
 
         return group;
     }
@@ -45,4 +45,20 @@ public static class DonationsEndpoints
       
         return donations.Any() ? TypedResults.Ok(donations.Select(donation => donation.AsDto()).ToList()) : TypedResults.NotFound();
     }
+
+    //Create organization
+    public static async Task<Created<Donation>> CreateDonationAsync (IDonationRepository repository, int organizationId, CreateDonationDto createDonationDto)
+    {
+        Donation donation = new()
+        {
+            OrganizationId = organizationId,
+            Amount = createDonationDto.Amount,
+            DonorName = createDonationDto.DonorName,
+            DonationDate = createDonationDto.Date
+        };
+
+        await repository.CreateAsync(donation);
+        return TypedResults.Created($"/donations/{donation.Id}", donation);
+    }
+
 }

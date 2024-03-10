@@ -25,8 +25,11 @@ public static class EntityExtensions
         return new DonationDto(
             donation.Id,
             donation.Amount,
-            donation.TransactionStatus,  
-            donation.Organization.AsDto()
+            donation.DonationDate,
+            donation.DonorName,
+            donation.TransactionStatus,
+            donation.OrganizationId,
+            donation.Organization?.AsDto()
         );
     }
     

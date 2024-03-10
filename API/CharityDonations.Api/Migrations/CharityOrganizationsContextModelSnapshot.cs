@@ -114,7 +114,7 @@ namespace CharityDonations.Api.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DonationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DonorName")

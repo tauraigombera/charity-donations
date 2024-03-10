@@ -7,7 +7,10 @@ public record DonationDto
 (
     int Id,
     decimal Amount,
-    TransactionStatus TransactionStatus,
-    OrganizationDto Organization
+    DateTime DonationDate,
+    string DonorName,
+    TransactionStatus? TransactionStatus,
+    int OrganizationId,
+    OrganizationDto? Organization
 );
   
