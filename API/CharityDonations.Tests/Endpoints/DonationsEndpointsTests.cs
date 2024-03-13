@@ -53,4 +53,31 @@ public class DonationsEndpointsTests
             Assert.Equal(2, donation2.OrganizationId);
         });
     }
+
+    [Fact]
+    public async Task Get_Donation_By_Id_Returns_Ok_When_Found()
+    {
+          // Arrange
+        var mockDonationRepository = new Mock<IDonationRepository>();
+        var donationId = 1;
+        var expectedDonation =  new Donation {
+            Id = donationId,
+            Amount = 100000,
+            DonationDate = DateTime.UtcNow,
+            DonorName = "Test User",
+            OrganizationId = 2
+        };
+           
+        mockDonationRepository.Setup(repo => repo.GetAsync(1)).ReturnsAsync(expectedDonation); 
+
+        // Act  
+        var response = await DonationsEndpoints.GetDonationByIdAsync(mockDonationRepository.Object, 1);
+
+        // Assert
+        Assert.IsType<Results<Ok<DonationDto>, NotFound>>(response);
+
+        var foundResult = response.Result;
+
+        Assert.NotNull(foundResult);
+    }
 }
