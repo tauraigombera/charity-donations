@@ -80,4 +80,24 @@ public class DonationsEndpointsTests
 
         Assert.NotNull(foundResult);
     }
+
+    [Fact]
+    public async Task Get_Donation_By_Id_Returns_NotFound_When_Not_Found()
+    {
+        // Arrange
+        var mockDonationRepository = new Mock<IDonationRepository>();
+       
+        mockDonationRepository.Setup(repo => repo.GetAsync(It.Is<int>(id => id == 1))) // There is no donation with id = 1
+                                  .ReturnsAsync((Donation?)null); 
+
+        // Act  
+        var response = await DonationsEndpoints.GetDonationByIdAsync(mockDonationRepository.Object, 1);
+
+        // Assert
+        Assert.IsType<Results<Ok<DonationDto>, NotFound>>(response);
+
+        var notFoundResult = (NotFound) response.Result;
+
+        Assert.NotNull(notFoundResult);
+    }
 }
