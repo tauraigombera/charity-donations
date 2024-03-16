@@ -27,8 +27,8 @@ public static class EntityExtensions
             donation.Amount,
             donation.DonationDate,
             donation.DonorName,
-            donation.OrganizationId,
-            donation.Organization?.AsDto()
+            donation.OrganizationId
+            //donation.Organization?.AsDto()
         );
     }
     

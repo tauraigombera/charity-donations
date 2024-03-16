@@ -51,8 +51,8 @@ public class GetAllDonationsTests
         response.Value.Should().BeEquivalentTo(
             new List<DonationDto>
             {
-                new(1, 100000, DateTime.Today, "Donor 1", 2, null),
-                new(2, 200000, DateTime.Today, "Donor 2", 2, null)
+                new(1, 100000, DateTime.Today, "Donor 1", 2),
+                new(2, 200000, DateTime.Today, "Donor 2", 2)
             }
         );
     }
