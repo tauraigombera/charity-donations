@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CharityDonations.Api.Data;
 
 namespace CharityDonations.Api.Models;
 
@@ -11,8 +10,7 @@ public class Donation
     [Required]
     public required DateTime DonationDate {get; set;}
     [Required]
-    public required string DonorName { get; set; } // Placeholder for donor
-    public TransactionStatus TransactionStatus {get; set;}
+    public required string DonorName { get; set; }
     [Required]
     public required int OrganizationId { get; set; }
     public Organization? Organization { get; set; }
