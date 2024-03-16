@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CharityDonations.Api.Data;
-using CharityDonations.Api.Dtos.OrganizationDtos;
 
 namespace CharityDonations.Api.Dtos.DonationDtos;
 
