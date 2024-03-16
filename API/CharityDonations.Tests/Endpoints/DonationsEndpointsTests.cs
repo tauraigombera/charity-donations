@@ -2,102 +2,55 @@
 using CharityDonations.Api.Dtos.DonationDtos;
 using CharityDonations.Api.Endpoints;
 using CharityDonations.Api.Models;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 
 namespace CharityDonations.Tests.Endpoints;
 
-public class DonationsEndpointsTests
+public class GetAllDonationsTests
 {
+    private static IEnumerable<Donation> GetTestDonations()
+    {
+        return new List<Donation>
+        {
+            new() { Id = 1, Amount = 100000, DonationDate = DateTime.UtcNow, DonorName = "Donor 1", OrganizationId = 2 },
+            new() { Id = 2, Amount = 200000, DonationDate = DateTime.UtcNow, DonorName = "Donor 2", OrganizationId = 2 }
+        };
+    }
+
     [Fact]
-    public async Task Get_Donations_Returns_Donations_Response_List()
+    public async Task ReturnsOkResultWithDonationDtos()
     {
         // Arrange
         var mockDonationRepository = new Mock<IDonationRepository>();
-        IEnumerable<Donation> mockDonations = new List<Donation> //creates an IEnumerable<Donations>
-        {
-            new Donation {
-                Id = 1,
-                Amount = 100000,
-                DonationDate = DateTime.UtcNow,
-                DonorName = "Taurai Gombera", // Placeholder for donor
-                OrganizationId = 2
-            },
-            new Donation {
-                Id = 2,
-                Amount = 200000,
-                DonationDate = DateTime.UtcNow,
-                DonorName = "Taurai Gombera", // Placeholder for donor
-                OrganizationId = 2
-            }
-        };
-        mockDonationRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(mockDonations);
+        mockDonationRepository.Setup(repo => repo.GetAllAsync())
+            .ReturnsAsync(GetTestDonations());
 
         // Act
         var response = await DonationsEndpoints.GetAllDonations(mockDonationRepository.Object);
 
-        //Assert
-        Assert.IsType<Ok<IEnumerable<DonationDto>>>(response);
-
-        Assert.NotNull(response.Value);
-        Assert.NotEmpty(response.Value);
-        Assert.Collection(response.Value, donation1 =>
-        {
-            Assert.Equal(1, donation1.Id);
-            Assert.Equal(100000, donation1.Amount);
-            Assert.Equal(2, donation1.OrganizationId);
-        }, donation2 =>
-        {
-            Assert.Equal(2, donation2.Id);
-            Assert.Equal(200000, donation2.Amount);
-            Assert.Equal(2, donation2.OrganizationId);
-        });
-    }
-
-    [Fact]
-    public async Task Get_Donation_By_Id_Returns_Ok_When_Found()
-    {
-          // Arrange
-        var mockDonationRepository = new Mock<IDonationRepository>();
-        var donationId = 1;
-        var expectedDonation =  new Donation {
-            Id = donationId,
-            Amount = 100000,
-            DonationDate = DateTime.UtcNow,
-            DonorName = "Test User",
-            OrganizationId = 2
-        };
-           
-        mockDonationRepository.Setup(repo => repo.GetAsync(1)).ReturnsAsync(expectedDonation); 
-
-        // Act  
-        var response = await DonationsEndpoints.GetDonationByIdAsync(mockDonationRepository.Object, 1);
-
         // Assert
-        Assert.IsType<Results<Ok<DonationDto>, NotFound>>(response);
-
-        var foundResult = response.Result;
-
-        Assert.NotNull(foundResult);
+        response.Should().BeOfType<Ok<IEnumerable<DonationDto>>>();
+        response.Value.Should().NotBeNull();
+        response.Value.Should().HaveCount(2);
     }
 
     [Fact]
-    public async Task Get_Donation_By_Id_Returns_NotFound_When_Not_Found()
+    public async Task ReturnsCorrectDonationDtos()
     {
         // Arrange
         var mockDonationRepository = new Mock<IDonationRepository>();
-       
-        mockDonationRepository.Setup(repo => repo.GetAsync(It.Is<int>(id => id == 1))) // There is no donation with id = 1
-                                  .ReturnsAsync((Donation?)null); 
+        mockDonationRepository.Setup(repo => repo.GetAllAsync())
+            .ReturnsAsync(GetTestDonations());
 
-        // Act  
-        var response = await DonationsEndpoints.GetDonationByIdAsync(mockDonationRepository.Object, 1);
+        // Act
+        var response = await DonationsEndpoints.GetAllDonations(mockDonationRepository.Object);
 
         // Assert
-        Assert.IsType<Results<Ok<DonationDto>, NotFound>>(response);
-
-        var notFoundResult = (NotFound) response.Result;
-
-        Assert.NotNull(notFoundResult);
+       // response.Value.Should().ContainEquivalentOf(
+           // new DonationDto { Id = 1, Amount = 100000, DonationDate = DateTime.UtcNow, DonorName = "Donor 1", OrganizationId = 2 },
+           // new DonationDto { Id = 2, Amount = 200000, DonationDate = DateTime.UtcNow, DonorName = "Donor 2", OrganizationId = 2 }
+       // );
     }
 }

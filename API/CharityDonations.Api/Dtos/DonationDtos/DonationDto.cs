@@ -1,5 +1,4 @@
-﻿using CharityDonations.Api.Data;
-using CharityDonations.Api.Dtos.OrganizationDtos;
+﻿using CharityDonations.Api.Dtos.OrganizationDtos;
 
 namespace CharityDonations.Api.Dtos.DonationDtos;
 
@@ -9,7 +8,6 @@ public record DonationDto
     decimal Amount,
     DateTime DonationDate,
     string DonorName,
-    TransactionStatus? TransactionStatus,
     int OrganizationId,
     OrganizationDto? Organization
 );

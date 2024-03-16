@@ -8,6 +8,5 @@ public record CreateDonationDto(
     [Required] decimal Amount,
     [Required] DateTime Date,
     [Required] [StringLength(50)] string DonorName,
-    [Required] TransactionStatus TransactionStatus,
     [Required] int OrganizationId
 );
