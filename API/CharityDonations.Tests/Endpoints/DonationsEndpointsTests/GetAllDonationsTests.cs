@@ -6,7 +6,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 
-namespace CharityDonations.Tests.Endpoints.GetAllDonationsTests;
+namespace CharityDonations.Tests.Endpoints.DonationEndpointsTests;
 
 public class GetAllDonationsTests
 {
