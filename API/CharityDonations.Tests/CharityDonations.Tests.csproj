@@ -29,4 +29,8 @@
     <ProjectReference Include="..\CharityDonations.Api\CharityDonations.Api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Endpoints\DonationsEndpointsTests\" />
+  </ItemGroup>
+
 </Project>

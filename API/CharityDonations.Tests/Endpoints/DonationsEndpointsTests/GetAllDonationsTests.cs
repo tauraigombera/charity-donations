@@ -6,7 +6,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 
-namespace CharityDonations.Tests.Endpoints;
+namespace CharityDonations.Tests.Endpoints.GetAllDonationsTests;
 
 public class GetAllDonationsTests
 {
@@ -14,8 +14,8 @@ public class GetAllDonationsTests
     {
         return new List<Donation>
         {
-            new() { Id = 1, Amount = 100000, DonationDate = DateTime.UtcNow, DonorName = "Donor 1", OrganizationId = 2 },
-            new() { Id = 2, Amount = 200000, DonationDate = DateTime.UtcNow, DonorName = "Donor 2", OrganizationId = 2 }
+            new() { Id = 1, Amount = 100000, DonationDate = DateTime.Today, DonorName = "Donor 1", OrganizationId = 2 },
+            new() { Id = 2, Amount = 200000, DonationDate = DateTime.Today, DonorName = "Donor 2", OrganizationId = 2 }
         };
     }
 
@@ -48,9 +48,12 @@ public class GetAllDonationsTests
         var response = await DonationsEndpoints.GetAllDonations(mockDonationRepository.Object);
 
         // Assert
-       // response.Value.Should().ContainEquivalentOf(
-           // new DonationDto { Id = 1, Amount = 100000, DonationDate = DateTime.UtcNow, DonorName = "Donor 1", OrganizationId = 2 },
-           // new DonationDto { Id = 2, Amount = 200000, DonationDate = DateTime.UtcNow, DonorName = "Donor 2", OrganizationId = 2 }
-       // );
+        response.Value.Should().BeEquivalentTo(
+            new List<DonationDto>
+            {
+                new(1, 100000, DateTime.Today, "Donor 1", 2, null),
+                new(2, 200000, DateTime.Today, "Donor 2", 2, null)
+            }
+        );
     }
 }
