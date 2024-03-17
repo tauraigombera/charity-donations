@@ -29,6 +29,7 @@ public class GetDonationByIdTests
         var response = await DonationsEndpoints.GetDonationByIdAsync(mockDonationRepository.Object, expectedDonation.Id);
 
         // Assert
+        response.Should().NotBeNull();
         response.Should().BeOfType<Results<Ok<DonationDto>, NotFound>>();
 
         // Extract the value from the response
@@ -37,11 +38,11 @@ public class GetDonationByIdTests
 
         // Assert the properties of the returned DonationDto
         donationDto.Should().NotBeNull();
-        donationDto?.Id.Should().Be(expectedDonation.Id);
-        donationDto?.Amount.Should().Be(expectedDonation.Amount);
-        donationDto?.DonationDate.Should().Be(expectedDonation.DonationDate);
-        donationDto?.DonorName.Should().Be(expectedDonation.DonorName);
-        donationDto?.OrganizationId.Should().Be(expectedDonation.OrganizationId);
+        donationDto!.Id.Should().Be(expectedDonation.Id);
+        donationDto!.Amount.Should().Be(expectedDonation.Amount);
+        donationDto!.DonationDate.Should().Be(expectedDonation.DonationDate);
+        donationDto!.DonorName.Should().Be(expectedDonation.DonorName);
+        donationDto!.OrganizationId.Should().Be(expectedDonation.OrganizationId);
     }
 
     [Fact]
