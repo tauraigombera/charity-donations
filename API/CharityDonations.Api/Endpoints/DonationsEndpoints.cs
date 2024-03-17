@@ -17,7 +17,7 @@ public static class DonationsEndpoints
         
         group.MapGet("/", GetAllDonations);
         group.MapGet("/{id}", GetDonationByIdAsync).WithName(GetDonationEndpointName);
-        group.MapGet("/organization/{OrganizationId}", GetDonationsByOrganizationIdAsync).WithName(GetDonationsByOrganizationEndpointName);
+        group.MapGet("/{OrganizationId}/Donations", GetDonationsByOrganizationIdAsync).WithName(GetDonationsByOrganizationEndpointName);
         group.MapPost("/", CreateDonationAsync);
 
         return group;
@@ -42,7 +42,6 @@ public static class DonationsEndpoints
     public static async Task<Results<Ok<List<DonationDto>>, NotFound>> GetDonationsByOrganizationIdAsync(IDonationRepository repository, int organizationId)
     {
         IEnumerable<Donation> donations = await repository.GetAllByOrganizationAsync(organizationId);
-      
         return donations.Any() ? TypedResults.Ok(donations.Select(donation => donation.AsDto()).ToList()) : TypedResults.NotFound();
     }
 
@@ -54,7 +53,7 @@ public static class DonationsEndpoints
             OrganizationId = organizationId,
             Amount = createDonationDto.Amount,
             DonorName = createDonationDto.DonorName,
-            DonationDate = createDonationDto.Date
+            DonationDate = DateTime.Now
         };
 
         await repository.CreateAsync(donation);
