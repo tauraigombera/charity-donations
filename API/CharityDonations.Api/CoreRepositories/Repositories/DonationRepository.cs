@@ -31,7 +31,7 @@ public class DonationRepository : IDonationRepository
 
     public async Task<IEnumerable<Donation>> GetAllByOrganizationAsync(int organizationId)
     {
-        return await dbContext.Donations.Where(d => d.Id == organizationId).ToListAsync();
+        return await dbContext.Donations.Where(d => d.OrganizationId == organizationId).ToListAsync();
     }
 
     // public Task<IEnumerable<Donation>> GetAllByUserAsync(User user)
