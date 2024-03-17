@@ -50,4 +50,27 @@ public class GetDonationsByOrganizationIdTests
         donationDtos![1].DonationDate.Should().Be(expectedDonations[1].DonationDate);
         donationDtos![1].DonorName.Should().Be(expectedDonations[1].DonorName);
     }
+
+    [Fact]
+    public async Task ReturnsNotFoundResult_WhenOrganizationDoesNotExist()
+    {
+        // Arrange
+        var mockDonationRepository = new Mock<IDonationRepository>();
+        mockDonationRepository.Setup(repo => repo.GetAsync(It.IsAny<int>()))
+        .ReturnsAsync((Donation?)null);
+
+        // Act
+        var response = await DonationsEndpoints.GetDonationsByOrganizationIdAsync(mockDonationRepository.Object, 1);
+
+        // Assert
+        response.Should().BeOfType<Results<Ok<List<DonationDto>>, NotFound>>();
+
+        // Extract the value from the response
+        var okResult = response.Result as Ok<List<DonationDto>>;
+        okResult.Should().BeNull();
+
+        if (okResult is not null){
+            okResult!.StatusCode.Should().Be(StatusCodes.Status404NotFound); // Verify the status code
+        }     
+    }
 }
