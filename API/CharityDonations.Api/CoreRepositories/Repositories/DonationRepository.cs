@@ -33,11 +33,6 @@ public class DonationRepository : IDonationRepository
     {
         return await dbContext.Donations.Where(d => d.OrganizationId == organizationId).ToListAsync();
     }
-
-    // public Task<IEnumerable<Donation>> GetAllByUserAsync(User user)
-    // {
-    //     throw new NotImplementedException();
-    // }
     
     public async Task CreateAsync(Donation donation)
     {
