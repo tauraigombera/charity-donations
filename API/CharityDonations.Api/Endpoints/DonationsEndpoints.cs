@@ -1,6 +1,4 @@
-﻿using CharityDonations.Api.Authorization;
-using CharityDonations.Api.CoreRepositories;
-using CharityDonations.Api.CoreRepositories.Repositories;
+﻿using CharityDonations.Api.CoreRepositories;
 using CharityDonations.Api.Dtos.DonationDtos;
 using CharityDonations.Api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
