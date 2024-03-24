@@ -4,6 +4,8 @@ using CharityDonations.Api.CoreRepositories;
 using CharityDonations.Api.CoreRepositories.Repositories;
 using CharityDonations.Api.Data;
 using CharityDonations.Api.Endpoints;
+using CharityDonations.Api.ErrorHandling;
+using CharityDonations.Api.Middleware;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.OpenApi.Models;
 
@@ -55,6 +57,12 @@ var connectionString = builder.Configuration["ConnectionStrings: CharityOrganiza
 builder.Services.AddSqlServer<ApiDbContext>(connectionString);
 
 var app = builder.Build();
+
+//Configuring error handling middleware
+app.UseExceptionHandler(exceptionHandlerMiddleware => exceptionHandlerMiddleware.ConfigureExceptionHandler());
+
+//Configuring time elapsed to complete a request middleware
+app.UseMiddleware<RequestTimingMiddleware>();
 
 // Initializing the database
 await app.Services.InitializeDbAsync();
